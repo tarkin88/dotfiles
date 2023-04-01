@@ -10,3 +10,5 @@ echo 'Stowing dotfiles...'
 
 stow -vSt ~ home
 echo 'Home stowed'
+stow -vSt ~/.config config
+echo 'config stowed'

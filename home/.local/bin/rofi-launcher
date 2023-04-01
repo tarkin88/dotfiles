@@ -1,0 +1,41 @@
+#! /bin/env bash
+VERSION=1.0.0
+_usage() {
+    cat <<- EOF
+Rofi launcher by tarkin88 version ${VERSION}
+Options:
+     -h      Display this message
+     -v      Show script version
+     -q      Persistant calculator dialog
+     -w      Switch between open windows
+     -r      Program launcher & run dialog
+     -c      Select previous clipboard entries
+     -p      Session logout choice
+EOF
+}
+if [[ $# -eq 0 ]] ; then
+    _usage
+    exit 0
+fi
+while getopts :rpcwqhv opt
+do
+    case "${opt}" in
+        r) rofi drun -show drun;;
+        p) rofi -show p -modi p:rofi-power-menu;;
+        c) rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}';;
+        w) rofi -modi window -show window;;
+        q) rofi -show calc -modi calc -no-show-match -no-sort;;
+        h)
+            _usage
+            exit 0
+            ;;
+        v) echo -e "${VERSION}";;
+        *)
+            echo -e "Option does not exist: -$OPTARG"
+            _usage
+            exit 1
+    esac
+done
+
+shift $((OPTIND - 1))
+exit 0

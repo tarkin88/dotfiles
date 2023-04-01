@@ -1,0 +1,85 @@
+#! /bin/env bash
+VERSION=1.0.0
+
+_usage() {
+    cat <<- EOF
+Media Manager by tarkin88 version ${VERSION}
+Options:
+     -h      Display this message
+     -v      Show script version
+     -p      previous track
+     -n      next track
+     -t      toogle play/pause
+     -u      volume level up
+     -d      volume level down
+     -m      mute volume
+EOF
+}
+
+if [[ $# -eq 0 ]] ; then
+    _usage
+    exit 0
+fi
+
+_notify_song(){
+  sleep 0.3s
+  _STATUS=$(playerctl status)
+  _TITLE=$(playerctl metadata | rg "title" | awk '{a=match($0, $3); print substr($0,a)}')
+  _ARTIST=$(playerctl metadata | rg "artist" | awk '{a=match($0, $3); print substr($0,a)}')
+  _ALBUM=$(playerctl metadata | rg "album" | awk '{a=match($0, $3); print substr($0,a)}')
+
+  if [[ ${_STATUS} == "Playing"  ]]; then
+    notify-send "${_ARTIST}" "<i>${_TITLE}</i>" -t 3000 
+  else
+    notify-send "${_STATUS}" -t 3000
+  fi
+  exit 0
+}
+
+_notify_volume(){
+  sleep 0.2s
+  _CURRENT_VOLUME=$(pulseaudio-ctl full-status | awk '{print $1}')
+  notify-send "Volume" "${_CURRENT_VOLUME} %" -t 2500
+  exit 0
+}
+while getopts :pntudmhv opt
+do
+    case "${opt}" in
+        
+        p)
+          playerctl previous;;
+          # _notify_song;;
+        n)
+          playerctl next;;
+          # _notify_song;;
+        t)
+          playerctl play-pause;;
+          # _notify_song;;
+        u)
+          pulseaudio-ctl up 5%
+          _notify_volume;;
+        d)
+          pulseaudio-ctl down 5%
+          _notify_volume;;
+        m)
+          pulseaudio-ctl mute
+          sleep 0.2s
+          _MUTE_STATE=$(pulseaudio-ctl full-status | awk '{print $2}')
+          if [[ $_MUTE_STATE == "yes" ]]; then
+            notify-send "Muted" 
+          else
+            notify-send "Unmuted" 
+          fi;;
+        h)
+          _usage
+          exit 0;;
+        v) echo -e "${VERSION}";;
+        *)
+          echo -e "Option does not exist: -$OPTARG"
+          _usage
+          exit 1
+    esac
+done
+
+shift $((OPTIND - 1))
+exit 0
