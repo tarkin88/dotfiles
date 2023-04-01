@@ -8,9 +8,5 @@ fi
 
 echo 'Stowing dotfiles...'
 
-if [ ! -d "${HOME}/.i3" ]; then
-    stow -vSt ~ i3
-    echo 'i3'
-else
-    echo 'backup i3 directory first'
-fi
+stow -vSt ~ home
+echo 'Home stowed'
