@@ -1,0 +1,24 @@
+#!/bin/bash
+function restart_process() {
+	killall -q "$1"
+	while pgrep -u $UID -x "$1" >/dev/null; do sleep 1; done
+	"$1" &
+	notify-send "$1 launched"
+}
+
+# autorandr -c &
+
+xrdb ~/.Xresources &
+pgrep -x sxhkd >/dev/null || sxhkd &
+
+restart_process dunst
+restart_process clipmenud
+restart_process nm-applet
+
+pkill polybar
+polybar main &
+
+pgrep -x picom >/dev/null || picom --experimental-backends &
+wal -Rq &
+xset r rate 350 20 &
+xsetroot -cursor_name left_ptr &

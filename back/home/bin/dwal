@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -e
+USER_DPI=130
+WALLPAPER_PATH="$HOME/Pictures/Wallpapers/"
+DMENU=$(find "${WALLPAPER_PATH}" | dmenu -p "Set Wallpaper:" -l 11)
+SELECTED="$DMENU"
+
+if [ -z "$DMENU" ]; then
+	exit 0
+else
+	wal -i "$SELECTED"
+	sed -i ~/.Xresources -re '1,1000d'
+	cat ~/.cache/wal/colors.Xresources >>~/.Xresources
+	echo "Xft.dpi: ${USER_DPI}" >>~/.Xresources
+	wal-telegram --background "$SELECTED" -g
+	bspc wm -r
+	notify-send "Enjoy your new colorscheme!"
+fi
