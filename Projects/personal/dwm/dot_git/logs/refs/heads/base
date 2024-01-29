@@ -1,0 +1,23 @@
+0000000000000000000000000000000000000000 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699917015 -0600	branch: Created from HEAD
+9f8855343c881bdc01b9fff5b956537ba1106b76 fd1a58530e15a27949e6cba4eb86af7e7d9f8fdd Francisco Suarez <franksg88@gmail.com> 1699917252 -0600	merge scratchpads: Fast-forward
+fd1a58530e15a27949e6cba4eb86af7e7d9f8fdd 27dcb6ec221273ffc91d0927ddb617585a12cb11 Francisco Suarez <franksg88@gmail.com> 1699917379 -0600	merge hide_vacant_tags: Merge made by the 'ort' strategy.
+27dcb6ec221273ffc91d0927ddb617585a12cb11 ca4ff3ced25bbe83849e3fed587f42fdb6970395 Francisco Suarez <franksg88@gmail.com> 1699917490 -0600	commit (merge): Merge branch 'center' into base
+ca4ff3ced25bbe83849e3fed587f42fdb6970395 6f6487a0e69318cf5aec9a76c4452874be9bc217 Francisco Suarez <franksg88@gmail.com> 1699917659 -0600	commit (merge): Merge branch 'actualfullscreen' into base
+6f6487a0e69318cf5aec9a76c4452874be9bc217 e3f12c5127f9cdeeefa491971a8ef3cfdb00e400 Francisco Suarez <franksg88@gmail.com> 1699918194 -0600	merge pertag: Merge made by the 'ort' strategy.
+e3f12c5127f9cdeeefa491971a8ef3cfdb00e400 cbb5f6d4ee80bd6055a09e706c0b80d916522404 Francisco Suarez <franksg88@gmail.com> 1699918298 -0600	merge centretitle: Merge made by the 'ort' strategy.
+cbb5f6d4ee80bd6055a09e706c0b80d916522404 bf60959ced02313e6e4d8d569b4b0e0642efa501 Francisco Suarez <franksg88@gmail.com> 1699918812 -0600	commit (merge): Merge branch 'xrdb' into base
+bf60959ced02313e6e4d8d569b4b0e0642efa501 cbb5f6d4ee80bd6055a09e706c0b80d916522404 Francisco Suarez <franksg88@gmail.com> 1699918984 -0600	reset: moving to cbb5f6d
+cbb5f6d4ee80bd6055a09e706c0b80d916522404 5ddd82480cf5c11c9cd7db0b079e35896d562be7 Francisco Suarez <franksg88@gmail.com> 1699919124 -0600	commit (merge): Merge branch 'systray' into base
+5ddd82480cf5c11c9cd7db0b079e35896d562be7 176f79f01f44867106d5838433e4fccb21685276 Francisco Suarez <franksg88@gmail.com> 1699919342 -0600	commit (merge): Merge branch 'fullgaps' into base
+176f79f01f44867106d5838433e4fccb21685276 b6cdf0ee41b941f608c21fbd9f20fd19e61f9cfd Francisco Suarez <franksg88@gmail.com> 1699920231 -0600	merge refreshrate: Merge made by the 'ort' strategy.
+b6cdf0ee41b941f608c21fbd9f20fd19e61f9cfd 18a4bb1aac1aa7190e317f940b6d38f0b4f24704 Francisco Suarez <franksg88@gmail.com> 1699920419 -0600	merge three-column: Merge made by the 'ort' strategy.
+18a4bb1aac1aa7190e317f940b6d38f0b4f24704 4a6812d1acbff23a4dc90f5c0f151cd42781329d Francisco Suarez <franksg88@gmail.com> 1699921045 -0600	commit (merge): Merge branch 'switchtotag' into base
+4a6812d1acbff23a4dc90f5c0f151cd42781329d 0a6ab1424dda7eec9fb06eebb12fecbc49d5cb15 Francisco Suarez <franksg88@gmail.com> 1699921390 -0600	commit (merge): Merge branch 'cyclelayouts' into base
+0a6ab1424dda7eec9fb06eebb12fecbc49d5cb15 64be24230a859fe3961036f5034fdb4cb3eb2951 Francisco Suarez <franksg88@gmail.com> 1699921902 -0600	commit: fix scratchpads
+64be24230a859fe3961036f5034fdb4cb3eb2951 126e05e53697316d9fa3d3c45baadcfbfb86e4e4 Francisco Suarez <franksg88@gmail.com> 1699986032 -0600	merge dragmfact: Merge made by the 'ort' strategy.
+126e05e53697316d9fa3d3c45baadcfbfb86e4e4 bb49b3f7a7c375b772e3a8e0155c21934782ced9 Francisco Suarez <franksg88@gmail.com> 1700236038 -0600	commit: base customize
+bb49b3f7a7c375b772e3a8e0155c21934782ced9 64be24230a859fe3961036f5034fdb4cb3eb2951 Francisco Suarez <franksg88@gmail.com> 1701114183 -0600	reset: moving to 64be242
+64be24230a859fe3961036f5034fdb4cb3eb2951 bb49b3f7a7c375b772e3a8e0155c21934782ced9 Francisco Suarez <franksg88@gmail.com> 1701114260 -0600	reset: moving to bb49b3f
+bb49b3f7a7c375b772e3a8e0155c21934782ced9 64be24230a859fe3961036f5034fdb4cb3eb2951 Francisco Suarez <franksg88@gmail.com> 1701114342 -0600	reset: moving to 64be242
+64be24230a859fe3961036f5034fdb4cb3eb2951 bb49b3f7a7c375b772e3a8e0155c21934782ced9 Francisco Suarez <franksg88@gmail.com> 1701114379 -0600	reset: moving to bb49b3f
+bb49b3f7a7c375b772e3a8e0155c21934782ced9 64be24230a859fe3961036f5034fdb4cb3eb2951 Francisco Suarez <franksg88@gmail.com> 1701114404 -0600	reset: moving to 64be242

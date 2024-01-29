@@ -1,0 +1,94 @@
+0000000000000000000000000000000000000000 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699916978 -0600	clone: from https://git.suckless.org/dwm
+9f8855343c881bdc01b9fff5b956537ba1106b76 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699917015 -0600	checkout: moving from master to base
+9f8855343c881bdc01b9fff5b956537ba1106b76 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699917023 -0600	checkout: moving from base to master
+9f8855343c881bdc01b9fff5b956537ba1106b76 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699917046 -0600	checkout: moving from master to scratchpads
+9f8855343c881bdc01b9fff5b956537ba1106b76 fd1a58530e15a27949e6cba4eb86af7e7d9f8fdd Francisco Suarez <franksg88@gmail.com> 1699917239 -0600	commit: scratchpads
+fd1a58530e15a27949e6cba4eb86af7e7d9f8fdd 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699917248 -0600	checkout: moving from scratchpads to base
+9f8855343c881bdc01b9fff5b956537ba1106b76 fd1a58530e15a27949e6cba4eb86af7e7d9f8fdd Francisco Suarez <franksg88@gmail.com> 1699917252 -0600	merge scratchpads: Fast-forward
+fd1a58530e15a27949e6cba4eb86af7e7d9f8fdd 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699917290 -0600	checkout: moving from base to master
+9f8855343c881bdc01b9fff5b956537ba1106b76 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699917329 -0600	checkout: moving from master to hide_vacant_tags
+9f8855343c881bdc01b9fff5b956537ba1106b76 c06972ce91bba5699dbc9ff5275195f8e7416efa Francisco Suarez <franksg88@gmail.com> 1699917363 -0600	commit: hide_vacant_tags
+c06972ce91bba5699dbc9ff5275195f8e7416efa fd1a58530e15a27949e6cba4eb86af7e7d9f8fdd Francisco Suarez <franksg88@gmail.com> 1699917376 -0600	checkout: moving from hide_vacant_tags to base
+fd1a58530e15a27949e6cba4eb86af7e7d9f8fdd 27dcb6ec221273ffc91d0927ddb617585a12cb11 Francisco Suarez <franksg88@gmail.com> 1699917379 -0600	merge hide_vacant_tags: Merge made by the 'ort' strategy.
+27dcb6ec221273ffc91d0927ddb617585a12cb11 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699917435 -0600	checkout: moving from base to master
+9f8855343c881bdc01b9fff5b956537ba1106b76 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699917439 -0600	checkout: moving from master to center
+9f8855343c881bdc01b9fff5b956537ba1106b76 3f23996aee8f7cbdecd8677bc5c9ad0735185e34 Francisco Suarez <franksg88@gmail.com> 1699917460 -0600	commit: center
+3f23996aee8f7cbdecd8677bc5c9ad0735185e34 27dcb6ec221273ffc91d0927ddb617585a12cb11 Francisco Suarez <franksg88@gmail.com> 1699917468 -0600	checkout: moving from center to base
+27dcb6ec221273ffc91d0927ddb617585a12cb11 ca4ff3ced25bbe83849e3fed587f42fdb6970395 Francisco Suarez <franksg88@gmail.com> 1699917490 -0600	commit (merge): Merge branch 'center' into base
+ca4ff3ced25bbe83849e3fed587f42fdb6970395 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699917495 -0600	checkout: moving from base to master
+9f8855343c881bdc01b9fff5b956537ba1106b76 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699917572 -0600	checkout: moving from master to actualfullscreen
+9f8855343c881bdc01b9fff5b956537ba1106b76 1816cddf2a336fceb78acc866bc8f9acd1155c2e Francisco Suarez <franksg88@gmail.com> 1699917590 -0600	commit: actualfullscreen
+1816cddf2a336fceb78acc866bc8f9acd1155c2e ca4ff3ced25bbe83849e3fed587f42fdb6970395 Francisco Suarez <franksg88@gmail.com> 1699917600 -0600	checkout: moving from actualfullscreen to base
+ca4ff3ced25bbe83849e3fed587f42fdb6970395 6f6487a0e69318cf5aec9a76c4452874be9bc217 Francisco Suarez <franksg88@gmail.com> 1699917659 -0600	commit (merge): Merge branch 'actualfullscreen' into base
+6f6487a0e69318cf5aec9a76c4452874be9bc217 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699917706 -0600	checkout: moving from base to master
+9f8855343c881bdc01b9fff5b956537ba1106b76 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699918091 -0600	checkout: moving from master to pertag
+9f8855343c881bdc01b9fff5b956537ba1106b76 f63066fdf1018f59180759d549b33a5e9cc5e831 Francisco Suarez <franksg88@gmail.com> 1699918183 -0600	commit: pertag
+f63066fdf1018f59180759d549b33a5e9cc5e831 6f6487a0e69318cf5aec9a76c4452874be9bc217 Francisco Suarez <franksg88@gmail.com> 1699918191 -0600	checkout: moving from pertag to base
+6f6487a0e69318cf5aec9a76c4452874be9bc217 e3f12c5127f9cdeeefa491971a8ef3cfdb00e400 Francisco Suarez <franksg88@gmail.com> 1699918194 -0600	merge pertag: Merge made by the 'ort' strategy.
+e3f12c5127f9cdeeefa491971a8ef3cfdb00e400 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699918265 -0600	checkout: moving from base to master
+9f8855343c881bdc01b9fff5b956537ba1106b76 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699918269 -0600	checkout: moving from master to centretitle
+9f8855343c881bdc01b9fff5b956537ba1106b76 140403ad1de04fc06b65704b1ead1201a3a1ebd3 Francisco Suarez <franksg88@gmail.com> 1699918287 -0600	commit: centretitle
+140403ad1de04fc06b65704b1ead1201a3a1ebd3 e3f12c5127f9cdeeefa491971a8ef3cfdb00e400 Francisco Suarez <franksg88@gmail.com> 1699918293 -0600	checkout: moving from centretitle to base
+e3f12c5127f9cdeeefa491971a8ef3cfdb00e400 cbb5f6d4ee80bd6055a09e706c0b80d916522404 Francisco Suarez <franksg88@gmail.com> 1699918298 -0600	merge centretitle: Merge made by the 'ort' strategy.
+cbb5f6d4ee80bd6055a09e706c0b80d916522404 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699918353 -0600	checkout: moving from base to master
+9f8855343c881bdc01b9fff5b956537ba1106b76 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699918373 -0600	checkout: moving from master to Xresources
+9f8855343c881bdc01b9fff5b956537ba1106b76 ebd4f856fb41caa836f8b20755f5f0fed9178d97 Francisco Suarez <franksg88@gmail.com> 1699918484 -0600	commit: Xresources
+ebd4f856fb41caa836f8b20755f5f0fed9178d97 cbb5f6d4ee80bd6055a09e706c0b80d916522404 Francisco Suarez <franksg88@gmail.com> 1699918497 -0600	checkout: moving from Xresources to base
+cbb5f6d4ee80bd6055a09e706c0b80d916522404 cbb5f6d4ee80bd6055a09e706c0b80d916522404 Francisco Suarez <franksg88@gmail.com> 1699918635 -0600	reset: moving to HEAD
+cbb5f6d4ee80bd6055a09e706c0b80d916522404 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699918683 -0600	checkout: moving from base to master
+9f8855343c881bdc01b9fff5b956537ba1106b76 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699918699 -0600	checkout: moving from master to xrdb
+9f8855343c881bdc01b9fff5b956537ba1106b76 86081569bc02b9c218d98180fb116c9a6723ec4b Francisco Suarez <franksg88@gmail.com> 1699918782 -0600	commit: xrdb
+86081569bc02b9c218d98180fb116c9a6723ec4b cbb5f6d4ee80bd6055a09e706c0b80d916522404 Francisco Suarez <franksg88@gmail.com> 1699918789 -0600	checkout: moving from xrdb to base
+cbb5f6d4ee80bd6055a09e706c0b80d916522404 bf60959ced02313e6e4d8d569b4b0e0642efa501 Francisco Suarez <franksg88@gmail.com> 1699918812 -0600	commit (merge): Merge branch 'xrdb' into base
+bf60959ced02313e6e4d8d569b4b0e0642efa501 cbb5f6d4ee80bd6055a09e706c0b80d916522404 Francisco Suarez <franksg88@gmail.com> 1699918984 -0600	reset: moving to cbb5f6d
+cbb5f6d4ee80bd6055a09e706c0b80d916522404 cbb5f6d4ee80bd6055a09e706c0b80d916522404 Francisco Suarez <franksg88@gmail.com> 1699918990 -0600	reset: moving to cbb5f6d
+cbb5f6d4ee80bd6055a09e706c0b80d916522404 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699919005 -0600	checkout: moving from base to master
+9f8855343c881bdc01b9fff5b956537ba1106b76 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699919029 -0600	checkout: moving from master to systray
+9f8855343c881bdc01b9fff5b956537ba1106b76 f4cf578df3b5cbefe93699eeb452f9e0f9376a7a Francisco Suarez <franksg88@gmail.com> 1699919047 -0600	commit: systray
+f4cf578df3b5cbefe93699eeb452f9e0f9376a7a cbb5f6d4ee80bd6055a09e706c0b80d916522404 Francisco Suarez <franksg88@gmail.com> 1699919052 -0600	checkout: moving from systray to base
+cbb5f6d4ee80bd6055a09e706c0b80d916522404 5ddd82480cf5c11c9cd7db0b079e35896d562be7 Francisco Suarez <franksg88@gmail.com> 1699919124 -0600	commit (merge): Merge branch 'systray' into base
+5ddd82480cf5c11c9cd7db0b079e35896d562be7 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699919129 -0600	checkout: moving from base to master
+9f8855343c881bdc01b9fff5b956537ba1106b76 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699919164 -0600	checkout: moving from master to fullgaps
+9f8855343c881bdc01b9fff5b956537ba1106b76 7241c5cb9ea7f874827b20e27c5399a54a579352 Francisco Suarez <franksg88@gmail.com> 1699919226 -0600	commit: fullgaps
+7241c5cb9ea7f874827b20e27c5399a54a579352 5ddd82480cf5c11c9cd7db0b079e35896d562be7 Francisco Suarez <franksg88@gmail.com> 1699919231 -0600	checkout: moving from fullgaps to base
+5ddd82480cf5c11c9cd7db0b079e35896d562be7 176f79f01f44867106d5838433e4fccb21685276 Francisco Suarez <franksg88@gmail.com> 1699919342 -0600	commit (merge): Merge branch 'fullgaps' into base
+176f79f01f44867106d5838433e4fccb21685276 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699919345 -0600	checkout: moving from base to master
+9f8855343c881bdc01b9fff5b956537ba1106b76 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699919373 -0600	checkout: moving from master to swallow
+9f8855343c881bdc01b9fff5b956537ba1106b76 176f79f01f44867106d5838433e4fccb21685276 Francisco Suarez <franksg88@gmail.com> 1699919383 -0600	checkout: moving from swallow to base
+176f79f01f44867106d5838433e4fccb21685276 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699919395 -0600	checkout: moving from base to master
+9f8855343c881bdc01b9fff5b956537ba1106b76 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699920202 -0600	checkout: moving from master to refreshrate
+9f8855343c881bdc01b9fff5b956537ba1106b76 b211356c78105d977d51be231a4932268a52049b Francisco Suarez <franksg88@gmail.com> 1699920218 -0600	commit: refreshrate
+b211356c78105d977d51be231a4932268a52049b 176f79f01f44867106d5838433e4fccb21685276 Francisco Suarez <franksg88@gmail.com> 1699920226 -0600	checkout: moving from refreshrate to base
+176f79f01f44867106d5838433e4fccb21685276 b6cdf0ee41b941f608c21fbd9f20fd19e61f9cfd Francisco Suarez <franksg88@gmail.com> 1699920231 -0600	merge refreshrate: Merge made by the 'ort' strategy.
+b6cdf0ee41b941f608c21fbd9f20fd19e61f9cfd 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699920242 -0600	checkout: moving from base to master
+9f8855343c881bdc01b9fff5b956537ba1106b76 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699920313 -0600	checkout: moving from master to three-column
+9f8855343c881bdc01b9fff5b956537ba1106b76 6a8d554d434e8f1f629fe064410d91c14dba57db Francisco Suarez <franksg88@gmail.com> 1699920397 -0600	commit: three-column layout
+6a8d554d434e8f1f629fe064410d91c14dba57db b6cdf0ee41b941f608c21fbd9f20fd19e61f9cfd Francisco Suarez <franksg88@gmail.com> 1699920415 -0600	checkout: moving from three-column to base
+b6cdf0ee41b941f608c21fbd9f20fd19e61f9cfd 18a4bb1aac1aa7190e317f940b6d38f0b4f24704 Francisco Suarez <franksg88@gmail.com> 1699920419 -0600	merge three-column: Merge made by the 'ort' strategy.
+18a4bb1aac1aa7190e317f940b6d38f0b4f24704 18a4bb1aac1aa7190e317f940b6d38f0b4f24704 Francisco Suarez <franksg88@gmail.com> 1699920621 -0600	reset: moving to HEAD
+18a4bb1aac1aa7190e317f940b6d38f0b4f24704 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699920703 -0600	checkout: moving from base to master
+9f8855343c881bdc01b9fff5b956537ba1106b76 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699920707 -0600	checkout: moving from master to switchtotag
+9f8855343c881bdc01b9fff5b956537ba1106b76 ca3d52862be44fbb1296b8d4044ddcdd610fe452 Francisco Suarez <franksg88@gmail.com> 1699920758 -0600	commit: switchtotag
+ca3d52862be44fbb1296b8d4044ddcdd610fe452 18a4bb1aac1aa7190e317f940b6d38f0b4f24704 Francisco Suarez <franksg88@gmail.com> 1699920764 -0600	checkout: moving from switchtotag to base
+18a4bb1aac1aa7190e317f940b6d38f0b4f24704 4a6812d1acbff23a4dc90f5c0f151cd42781329d Francisco Suarez <franksg88@gmail.com> 1699921045 -0600	commit (merge): Merge branch 'switchtotag' into base
+4a6812d1acbff23a4dc90f5c0f151cd42781329d 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699921335 -0600	checkout: moving from base to master
+9f8855343c881bdc01b9fff5b956537ba1106b76 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699921338 -0600	checkout: moving from master to cyclelayouts
+9f8855343c881bdc01b9fff5b956537ba1106b76 fa5ca0c16b05adb0464b526bacd63ed4040bfa59 Francisco Suarez <franksg88@gmail.com> 1699921357 -0600	commit: cyclelayouts
+fa5ca0c16b05adb0464b526bacd63ed4040bfa59 4a6812d1acbff23a4dc90f5c0f151cd42781329d Francisco Suarez <franksg88@gmail.com> 1699921367 -0600	checkout: moving from cyclelayouts to base
+4a6812d1acbff23a4dc90f5c0f151cd42781329d 0a6ab1424dda7eec9fb06eebb12fecbc49d5cb15 Francisco Suarez <franksg88@gmail.com> 1699921390 -0600	commit (merge): Merge branch 'cyclelayouts' into base
+0a6ab1424dda7eec9fb06eebb12fecbc49d5cb15 0a6ab1424dda7eec9fb06eebb12fecbc49d5cb15 Francisco Suarez <franksg88@gmail.com> 1699921705 -0600	reset: moving to HEAD
+0a6ab1424dda7eec9fb06eebb12fecbc49d5cb15 64be24230a859fe3961036f5034fdb4cb3eb2951 Francisco Suarez <franksg88@gmail.com> 1699921902 -0600	commit: fix scratchpads
+64be24230a859fe3961036f5034fdb4cb3eb2951 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699985899 -0600	checkout: moving from base to master
+9f8855343c881bdc01b9fff5b956537ba1106b76 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699985911 -0600	checkout: moving from master to dragmfact
+9f8855343c881bdc01b9fff5b956537ba1106b76 9f8855343c881bdc01b9fff5b956537ba1106b76 Francisco Suarez <franksg88@gmail.com> 1699985986 -0600	reset: moving to HEAD
+9f8855343c881bdc01b9fff5b956537ba1106b76 e85cac9508689c941f311e7c2bf15ac11bde1309 Francisco Suarez <franksg88@gmail.com> 1699986020 -0600	commit: dragmfact
+e85cac9508689c941f311e7c2bf15ac11bde1309 64be24230a859fe3961036f5034fdb4cb3eb2951 Francisco Suarez <franksg88@gmail.com> 1699986027 -0600	checkout: moving from dragmfact to base
+64be24230a859fe3961036f5034fdb4cb3eb2951 126e05e53697316d9fa3d3c45baadcfbfb86e4e4 Francisco Suarez <franksg88@gmail.com> 1699986032 -0600	merge dragmfact: Merge made by the 'ort' strategy.
+126e05e53697316d9fa3d3c45baadcfbfb86e4e4 126e05e53697316d9fa3d3c45baadcfbfb86e4e4 Francisco Suarez <franksg88@gmail.com> 1700101725 -0600	reset: moving to HEAD
+126e05e53697316d9fa3d3c45baadcfbfb86e4e4 126e05e53697316d9fa3d3c45baadcfbfb86e4e4 Francisco Suarez <franksg88@gmail.com> 1700236019 -0600	reset: moving to HEAD
+126e05e53697316d9fa3d3c45baadcfbfb86e4e4 bb49b3f7a7c375b772e3a8e0155c21934782ced9 Francisco Suarez <franksg88@gmail.com> 1700236038 -0600	commit: base customize
+bb49b3f7a7c375b772e3a8e0155c21934782ced9 64be24230a859fe3961036f5034fdb4cb3eb2951 Francisco Suarez <franksg88@gmail.com> 1701114183 -0600	reset: moving to 64be242
+64be24230a859fe3961036f5034fdb4cb3eb2951 bb49b3f7a7c375b772e3a8e0155c21934782ced9 Francisco Suarez <franksg88@gmail.com> 1701114260 -0600	reset: moving to bb49b3f
+bb49b3f7a7c375b772e3a8e0155c21934782ced9 64be24230a859fe3961036f5034fdb4cb3eb2951 Francisco Suarez <franksg88@gmail.com> 1701114342 -0600	reset: moving to 64be242
+64be24230a859fe3961036f5034fdb4cb3eb2951 bb49b3f7a7c375b772e3a8e0155c21934782ced9 Francisco Suarez <franksg88@gmail.com> 1701114379 -0600	reset: moving to bb49b3f
+bb49b3f7a7c375b772e3a8e0155c21934782ced9 64be24230a859fe3961036f5034fdb4cb3eb2951 Francisco Suarez <franksg88@gmail.com> 1701114404 -0600	reset: moving to 64be242
