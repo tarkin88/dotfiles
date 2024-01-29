@@ -1,0 +1,14 @@
+#!/bin/env bash
+DIRS_OPTS="st -c floating -g 160x35 -e ranger"
+FILES_OPTS="st -c floating -g 170x40 -e nvim"
+
+case "$(echo -e "neovim\nbspwm\nsxhkd\nautostart\nbin\nprojects\npolybar" | rofi ${ROFI_DMENU_OPTS} -p \
+    "Open")" in
+        neovim) ${DIRS_OPTS} ~/.config/nvim/;;
+        bspwm)  ${FILES_OPTS} ~/.config/bspwm/bspwmrc;;
+        sxhkd) ${FILES_OPTS} ~/.config/sxhkd/sxhkdrc;;
+        autostart) ${FILES_OPTS} ~/.local/bin/autostart.sh;;
+        bin) ${DIRS_OPTS} ~/.local/bin/;;
+        projects) ${DIRS_OPTS} ~/Projects/;;
+        polybar) ${DIRS_OPTS} ~/.config/polybar/;;
+esac

@@ -1,0 +1,10 @@
+#!/bin/env bash
+
+case "$(echo -e "Firefox\nSlack\nCode\nSpotify\n1Password\nCalculator" | rofi ${ROFI_DMENU_OPTS} -p "Execute" )" in
+    Firefox) exec firefox;;
+    Slack) exec slack;;
+    Code) exec code;;
+    1Password) exec 1password;;
+    Calculator) exec galculator;;
+    Spotify) exec spotify;;
+esac
