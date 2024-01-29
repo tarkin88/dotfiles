@@ -1,14 +1,11 @@
 #!/bin/env bash
 userprofile=$HOME/.xprofile
 userresources=$HOME/.Xresources
-autostart=$HOME/.local/bin/autostart.sh
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
 if [ -f $sysresources ]; then
-
     xrdb -merge $sysresources
-
 fi
 
 if [ -f $sysmodmap ]; then
@@ -16,17 +13,10 @@ if [ -f $sysmodmap ]; then
 fi
 
 if [ -f $userprofile ]; then
-
     source $userprofile
-
 fi
 
 if [ -f "$userresources" ]; then
     xrdb -merge "$userresources"
 fi
-
-
-# while :; do
-# 	ssh-agent dwm
-# done
 exec bspwm
