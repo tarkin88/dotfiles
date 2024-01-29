@@ -1,0 +1,43 @@
+[global]
+	geometry = "600x7-30+40"
+	frame_width = 4
+    separator_height = 0
+	padding = 8
+    horizontal_padding = 8
+	history_length = 1
+	icon_position = left
+	max_icon_size=64
+	word_wrap = yes
+	mouse_left_click = do_action
+	mouse_middle_click = close_all
+	mouse_right_click = close_current
+	format = "<b>%s</b>\n%b"
+	follow = mouse
+	show_indicators = yes
+	markup = full
+  font = Cantarell 12
+
+
+[urgency_low]
+    background = "#121212"
+    foreground = "#FFFFFF"
+    frame_color = "#80C895"
+    timeout = 5
+
+[urgency_normal]
+    background = "#121212"
+    foreground = "#FFFFFF"
+    frame_color = "#88B2F6"
+    timeout = 10
+    highlight = "#88B2F6"
+
+[urgency_critical]
+    background = "#121212"
+    foreground = "#FFFFFF"
+    frame_color = "#F18A81"
+    timeout = 0
+
+[Volume]
+    summary = "Volume *"
+    timeout = 1
+
