@@ -1,5 +1,9 @@
 return {
   {
+    "folke/neodev.nvim",
+    lazy = true,
+  },
+  {
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
     dependencies = {
