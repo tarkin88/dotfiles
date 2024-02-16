@@ -5,39 +5,42 @@ Xft.hinting:   1
 Xft.autohint:  0
 *.font: JetBrainsMono Nerd Font:pixelsize=18:antialias=true:autohint=true:hintstyle=hintmedium
 
-! special
-*.foreground:   #e0def4
-*.background:   #232136
-*.cursorColor:  #e0def4
+#include "/home/frank/.Xresources.d/dusk.resources/themes/dark/everforest.res"
+#include "/home/frank/.Xresources.d/dusk.resources/themes/template.txt"
 
-! black
-*.color0:       #2a273f
-*.color8:       #393552
+! ! special
+! *.foreground:   #e0def4
+! *.background:   #232136
+! *.cursorColor:  #e0def4
 
-! red
-*.color1:       #eb6f92
-*.color9:       #eb6f92
+! ! black
+! *.color0:       #2a273f
+! *.color8:       #393552
 
-! green
-*.color2:       #f6c177
-*.color10:      #f6c177
+! ! red
+! *.color1:       #eb6f92
+! *.color9:       #eb6f92
 
-! yellow
-*.color3:       #ea9a97
-*.color11:      #ea9a97
+! ! green
+! *.color2:       #f6c177
+! *.color10:      #f6c177
 
-! blue
-*.color4:       #3e8fb0
-*.color12:      #3e8fb0
+! ! yellow
+! *.color3:       #ea9a97
+! *.color11:      #ea9a97
 
-! magenta
-*.color5:       #c4a7e7
-*.color13:      #c4a7e7
+! ! blue
+! *.color4:       #3e8fb0
+! *.color12:      #3e8fb0
 
-! cyan
-*.color6:       #9ccfd8
-*.color14:      #9ccfd8
+! ! magenta
+! *.color5:       #c4a7e7
+! *.color13:      #c4a7e7
 
-! white
-*.color7:       #6e6a86
-*.color15:      #908caa
+! ! cyan
+! *.color6:       #9ccfd8
+! *.color14:      #9ccfd8
+
+! ! white
+! *.color7:       #6e6a86
+! *.color15:      #908caa
