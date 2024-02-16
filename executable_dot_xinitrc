@@ -19,4 +19,5 @@ fi
 if [ -f "$userresources" ]; then
     xrdb -merge "$userresources"
 fi
-exec bspwm
+exec dusk
+# exec Hyprland
