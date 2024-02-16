@@ -7,14 +7,15 @@ function restart {
   fi
   $1 $2 $3 $4 &
 }
+
 restart dbus-launch --sh-syntax
 restart dunst
 restart betterlockscreen -w
 restart compfy
 eval "$(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)"
 rofi-polkit-agent &
-~/.local/bin/launch-polybar &
 greenclip daemon &
+
 xset -dpms
 xset s 840 900 # dim at 14 min and lock at 15 min
 xss-lock -n ~/.local/bin/notify-suspend  -- betterlockscreen -l dimblur &
@@ -23,4 +24,5 @@ sleep 2s;restart udiskie -as
 if [ -f "$HOME/.local-machine" ] ; then
   source "$HOME/.local-machine"
 fi
+
 notify-send "Welcome Back" &
