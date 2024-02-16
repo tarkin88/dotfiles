@@ -1,0 +1,11 @@
+pyversion=3.9
+pvenv=$(basename $PWD)
+
+use python ${pyversion}
+# Create the virtualenv if not yet done
+layout virtualenv ${pyversion} ${pvenv}
+# activate it
+# layout activate ${pvenv}-${pyversion}
+export PYENV_VERSION=${pvenv}-${pyversion}
+export PROJECT_ID=earthranger-poc
+export COLLECTION=tenants
