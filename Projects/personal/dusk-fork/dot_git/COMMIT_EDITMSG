@@ -1,0 +1,27 @@
+Merge branch 'master' into customize
+
+# Conflicts:
+#	config.def.h
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please run
+#	git update-ref -d MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch customize
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   config.def.h
+#	modified:   dusk.c
+#	modified:   lib/ewmh.c
+#	modified:   lib/renamed_scratchpads.c
+#	modified:   lib/workspace.c
+#	modified:   lib/workspace.h
+#	modified:   util.c
+#	modified:   util.h
+#
