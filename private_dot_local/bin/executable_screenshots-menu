@@ -1,70 +1,30 @@
-#! /bin/env bash
-# Author: Francisco Suárez (tarkin88). 
-# Dec 2023
-Name=$(basename "$0")
-Version="1.0"
-Develop="Francisco Suárez"
+#! /bin/bash
 
+_take_ss() {
+	DIR=~/Pictures/Screenshots
+	FILE=screenshot_$(date +%Y-%m-%d--%H:%M:%S).png
 
-_take_ss (){
-  DIR=~/Pictures/Screenshots
-  FILE=screenshot_$(date +%Y-%m-%d--%H:%M:%S).png
+	if [ ! -d "${DIR}" ]; then
+		mkdir -p "${DIR}"
+	fi
 
-  case "${1}" in 
-    f) 
-      maim "${DIR}/$FILE" && xclip -selection clipboard -t image/png "${DIR}/${FILE}";;
-    s) 
-      maim -s "${DIR}/$FILE" && xclip -selection clipboard -t image/png "${DIR}/${FILE}";;
-    d) 
-      maim -d 3 "${DIR}/$FILE" && xclip -selection clipboard -t image/png "${DIR}/${FILE}";;
-  esac
-  notify-send "Screenshot Saved as:" ${FILE} -i "${DIR}/$FILE" 
+	case "${1}" in
+	f)
+		maim "${DIR}/$FILE" && xclip -selection clipboard -t image/png "${DIR}/${FILE}"
+		;;
+	s)
+		maim -s "${DIR}/$FILE" && xclip -selection clipboard -t image/png "${DIR}/${FILE}"
+		;;
+	d)
+		maim -d 3 "${DIR}/$FILE" && xclip -selection clipboard -t image/png "${DIR}/${FILE}"
+		;;
+	esac
+notify-send "Screenshot Saved as:" "${FILE}" -i "${DIR}/$FILE"
 }
 
-_menu ()
-{
-  case "$(echo -e "Fullscreen\nSelect\nDelay" | rofi ${ROFI_DMENU_OPTS} -p  \
-      "Options")" in
-      Fullscreen) _take_ss f;;
-      Select) _take_ss s;;
-      Delay) t_ake_ss d;;
-  esac
-}
-
-
-
-_usage() {
-    cat <<- EOF
-Usage:   $Name [options] by $Develop
-
-Options:
-     -h      Display this message
-     -m      call dmenu menu with following options:
-            * Take a Fullscreen screenshot
-            * Take a Crop screenshot
-            * Take a screenshot with delay
-EOF
-}
-
- if [ -z "$*" ]; then _usage; fi
-
-
-while getopts ":hvm" opt; do
-    case $opt in
-      h)
-            _usage
-            exit 0
-            ;;
-      v)
-            echo -e "$Name -- Version $Version by $Develop"
-            exit 0
-            ;;
-      m)
-            _menu
-            ;;
-      *)
-            echo -e "Option does not exist: -$OPTARG"
-            _usage
-            exit 1;;
-    esac
-  done
+case "$(echo -e "Fullscreen\nSelect\nDelay" | rofi "${ROFI_DMENU_OPTS}" -p \
+	"Options")" in
+Fullscreen) _take_ss f ;;
+Select) _take_ss s ;;
+Delay) t_ake_ss d ;;
+esac
