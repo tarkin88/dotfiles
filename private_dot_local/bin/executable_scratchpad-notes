@@ -13,4 +13,4 @@ if [ ! -f "${FILE}" ] ; then
     echo -e "# ToDo\n$(date +%Y-%m-%d)\n\n* [ ]  " >> "${FILE}"
 fi
 
-bspwm-toggle-visibility  scratchpad-notes "st -c scratchpad-notes -g 85x43-0-0 -e nvim ${FILE}"
+exec st -c scratchpad-notes -g 85x43-0-0 -e nvim "${FILE}"

@@ -1,49 +1,20 @@
 return {
-  "catppuccin/nvim",
-  name = "catppuccin",
+  "neanias/everforest-nvim",
+  version = false,
   lazy = false,
-  priority = 1000, -- make sure to load this before all the other start plugins
+  priority = 1000,
   opts = {
-    flavour = "frappe",
-    no_italic = false,         -- Force no italic
-    no_bold = false,           -- Force no bold
-    no_underline = false,      -- Force no underline
-    styles = {                 -- Handles the styles of general hi groups (see `:h highlight-args`):
-      comments = { "italic" }, -- Change the style of comments
-      conditionals = { "italic" },
-      loops = {},
-      functions = {},
-      keywords = { "bold" },
-      strings = {},
-      variables = {},
-      numbers = {},
-      booleans = {},
-      properties = {},
-      types = { "italic" },
-      operators = { "bold" },
-    },
-    integrations = {
-      cmp = true,
-      gitsigns = true,
-      nvimtree = true,
-      treesitter = true,
-      notify = false,
-      mini = {
-        enabled = true,
-        indentscope_color = "",
-      },
-    },
-    custom_highlights = function(colors)
-      return {
-        Comment = { fg = colors.flamingo },
-        TabLineSel = { bg = colors.pink },
-        CmpBorder = { fg = colors.surface2 },
-        Pmenu = { bg = colors.none },
-      }
-    end
+    background = "soft",
+    italics = true,
+    on_highlights = function(hl, palette)
+      hl.DiagnosticError = { fg = palette.none, bg = palette.none, sp = palette.red }
+      hl.DiagnosticWarn = { fg = palette.none, bg = palette.none, sp = palette.yellow }
+      hl.DiagnosticInfo = { fg = palette.none, bg = palette.none, sp = palette.blue }
+      hl.DiagnosticHint = { fg = palette.none, bg = palette.none, sp = palette.green }
+    end,
   },
   config = function(_, opts)
-    local theme = require("catppuccin")
+    local theme = require("everforest")
     theme.setup(opts)
     theme.load()
   end,

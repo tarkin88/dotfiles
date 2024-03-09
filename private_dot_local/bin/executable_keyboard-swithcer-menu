@@ -5,7 +5,7 @@ change_layout ()
   notify-send "Keyboard Layout changed" "set to ${1}"
 }
 
-case "$(echo -e "latam\nus" | rofi ${ROFI_DMENU_OPTS} -p "Keyboard")" in
+case "$(echo -e "latam\nus" | dmenu -l 2 -i  -c -p "Keyboard")" in
         latam) change_layout latam;;
         us) change_layout us;;
 esac

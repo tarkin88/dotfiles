@@ -2,7 +2,7 @@
 DIRS_OPTS="st -c floating -g 160x35 -e ranger"
 FILES_OPTS="st -c floating -g 170x40 -e nvim"
 
-case "$(echo -e "neovim\ndusk\nautostart\nbin\nprojects\npolybar" | rofi ${ROFI_DMENU_OPTS} -p \
+case "$(echo -e "neovim\ndusk\nautostart\nbin\nprojects\npolybar" | dmenu -l 8 -c -i -p \
     "Open")" in
         neovim) ${DIRS_OPTS} ~/.config/nvim/;;
         dusk)  ${FILES_OPTS} ~/Projects/personal/dusk-fork/config.def.h;;

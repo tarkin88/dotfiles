@@ -143,10 +143,10 @@ dusk.sel.float.*.color:               FLOAT_SEL_BG_COLOR
 #endif
 
 ! === dmenu colors ===
-dmenu.norm.fg.color:                  BASE_FOREGROUND
-dmenu.norm.bg.color:                  BASE_BACKGROUND
-dmenu.sel.fg.color:                   SELECTED_FOREGROUND
-dmenu.sel.bg.color:                   SELECTED_BACKGROUND
+dmenu.foreground:                  BASE_FOREGROUND
+dmenu.background:                  BASE_BACKGROUND
+dmenu.selforeground:                   SELECTED_FOREGROUND
+dmenu.selbackground:                   SELECTED_BACKGROUND
 dmenu.border.bg.color:                BORDER
 dmenu.out.fg.color:                   MARKED_FG_COLOR
 dmenu.out.bg.color:                   MARKED_BG_COLOR

@@ -13,7 +13,7 @@ restart dunst
 restart betterlockscreen -w
 restart compfy
 eval "$(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)"
-rofi-polkit-agent &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 greenclip daemon &
 
 xset -dpms
@@ -21,6 +21,7 @@ xset s 840 900 # dim at 14 min and lock at 15 min
 xss-lock -n ~/.local/bin/notify-suspend -- betterlockscreen -l dimblur &
 sleep 2s
 restart udiskie -as
+bash -c ~/.local/bin/status-updater.sh &
 
 if [ -f "$HOME/.local-machine" ]; then
 	source "$HOME/.local-machine"

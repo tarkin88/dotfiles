@@ -1,9 +1,9 @@
 #!/bin/sh
 
-case "$(echo -e "Poweroff\nReboot\nLogout\nSuspend\nLock" | rofi ${ROFI_DMENU_OPTS} -p "Power")" in
+case "$(echo -e "Poweroff\nReboot\nLogout\nSuspend\nLock" | dmenu -l 5 -i -c -p "Power")" in
         Poweroff) exec systemctl poweroff;;
         Reboot) exec systemctl reboot;;
-        Logout) exec bspc quit;;
+        Logout) exec duskc run_command quit;;
         Suspend) exec systemctl suspend;;
         Lock) exec betterlockscreen -l dimblur;;
 esac
