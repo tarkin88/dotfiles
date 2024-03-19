@@ -26,7 +26,7 @@ static const float pfact                 = 0.25; /* size of workspace previews r
 static int floatposgrid_x                = 5;   /* float grid columns */
 static int floatposgrid_y                = 5;   /* float grid rows */
 
-static const int horizpadbar             = 2;   /* horizontal (inner) padding for statusbar (increases lrpad) */
+static const int horizpadbar             = 0;   /* horizontal (inner) padding for statusbar (increases lrpad) */
 static const int vertpadbar              = 0;   /* vertical (inner) padding for statusbar (increases bh, overridden by bar_height) */
 
 static const char slopspawnstyle[]       = "-t 0 -c 0.92,0.85,0.69,0.3 -o"; /* do NOT define -f (format) here */
@@ -84,7 +84,7 @@ static uint64_t functionality = 0
 	|CenteredWindowName // center the window titles on the bar
 //	|BarActiveGroupBorderColor // use border color of active group for the bar, otherwise normal scheme is used
 //	|BarMasterGroupBorderColor // use border color of master group for the bar, otherwise normal scheme is used
-	|FlexWinBorders // use the SchemeFlex* color schemes, falls back to SchemeTitle* if disabled
+//	|FlexWinBorders // use the SchemeFlex* color schemes, falls back to SchemeTitle* if disabled
 	|SpawnCwd // spawn applications in the currently selected client's working directory
 	// |ColorEmoji // enables color emoji support (removes Xft workaround)
 //	|Status2DNoAlpha // option to not use alpha when drawing status2d status
@@ -143,72 +143,24 @@ static const ResourcePref resources[] = {
 	{ "dmenu.font", STRING, &dmenufont },
 };
 
+/* Default opacity levels         fg      bg     border */
 unsigned int default_alphas[] = { OPAQUE, 0xd0U, OPAQUE };
 
 static char *colors[SchemeLast][4] = {
-	/*                       fg         bg         border     resource prefix */
-	[SchemeNorm]         = { "#D9CFC5", "#492B2D", "#492B2D", "norm" },
-	[SchemeSel]          = { "#D9CFC5", "#82363A", "#82363A", "sel" },
-	[SchemeTitleNorm]    = { "#D9CFC5", "#492B2D", "#643B3E", "titlenorm" },
-	[SchemeTitleSel]     = { "#D9CFC5", "#82363A", "#82363A", "titlesel" },
-	[SchemeWsNorm]       = { "#D9CFC5", "#492B2D", "#000000", "wsnorm" },
-	[SchemeWsVisible]    = { "#D9CFC5", "#82363A", "#000000", "wsvis" },
-	[SchemeWsSel]        = { "#D9CFC5", "#82363A", "#000000", "wssel" },
-	[SchemeWsOcc]        = { "#D9CFC5", "#492B2D", "#000000", "wsocc" },
-	[SchemeHidNorm]      = { "#D9CFC5", "#492B2D", "#643B3E", "hidnorm" },
-	[SchemeHidSel]       = { "#D9CFC5", "#82363A", "#82363A", "hidsel" },
-	[SchemeUrg]          = { "#E0E0E0", "#A23419", "#A23419", "urg" },
-	[SchemeMarked]       = { "#DDC470", "#724559", "#724559", "marked" },
-	[SchemeScratchNorm]  = { "#D9CFC5", "#492B2D", "#643B3E", "scratchnorm" },
-	[SchemeScratchSel]   = { "#D9CFC5", "#82363A", "#82363A", "scratchsel" },
-	[SchemeFlexActTTB]   = { "#D9CFC5", "#492B2D", "#643B3E", "act.TTB" },
-	[SchemeFlexActLTR]   = { "#D9CFC5", "#492B2D", "#643B3E", "act.LTR" },
-	[SchemeFlexActMONO]  = { "#D9CFC5", "#492B2D", "#643B3E", "act.MONO" },
-	[SchemeFlexActGRID]  = { "#D9CFC5", "#492B2D", "#643B3E", "act.GRID" },
-	[SchemeFlexActGRIDC] = { "#D9CFC5", "#492B2D", "#643B3E", "act.GRIDC" },
-	[SchemeFlexActGRD1]  = { "#D9CFC5", "#492B2D", "#643B3E", "act.GRD1" },
-	[SchemeFlexActGRD2]  = { "#D9CFC5", "#492B2D", "#643B3E", "act.GRD2" },
-	[SchemeFlexActGRDM]  = { "#D9CFC5", "#492B2D", "#643B3E", "act.GRDM" },
-	[SchemeFlexActHGRD]  = { "#D9CFC5", "#492B2D", "#643B3E", "act.HGRD" },
-	[SchemeFlexActDWDL]  = { "#D9CFC5", "#492B2D", "#643B3E", "act.DWDL" },
-	[SchemeFlexActDWDLC] = { "#D9CFC5", "#492B2D", "#643B3E", "act.DWDLC" },
-	[SchemeFlexActSPRL]  = { "#D9CFC5", "#492B2D", "#643B3E", "act.SPRL" },
-	[SchemeFlexActSPRLC] = { "#D9CFC5", "#492B2D", "#643B3E", "act.SPRLC" },
-	[SchemeFlexActTTMI]  = { "#D9CFC5", "#492B2D", "#643B3E", "act.TTMI" },
-	[SchemeFlexActTTMIC] = { "#D9CFC5", "#492B2D", "#643B3E", "act.TTMIC" },
-	[SchemeFlexActFloat] = { "#D9CFC5", "#492B2D", "#643B3E", "act.float" },
-	[SchemeFlexInaTTB]   = { "#D9CFC5", "#492B2D", "#643B3E", "norm.TTB" },
-	[SchemeFlexInaLTR]   = { "#D9CFC5", "#492B2D", "#643B3E", "norm.LTR" },
-	[SchemeFlexInaMONO]  = { "#D9CFC5", "#492B2D", "#643B3E", "norm.MONO" },
-	[SchemeFlexInaGRID]  = { "#D9CFC5", "#492B2D", "#643B3E", "norm.GRID" },
-	[SchemeFlexInaGRIDC] = { "#D9CFC5", "#492B2D", "#643B3E", "norm.GRIDC" },
-	[SchemeFlexInaGRD1]  = { "#D9CFC5", "#492B2D", "#643B3E", "norm.GRD1" },
-	[SchemeFlexInaGRD2]  = { "#D9CFC5", "#492B2D", "#643B3E", "norm.GRD2" },
-	[SchemeFlexInaGRDM]  = { "#D9CFC5", "#492B2D", "#643B3E", "norm.GRDM" },
-	[SchemeFlexInaHGRD]  = { "#D9CFC5", "#492B2D", "#643B3E", "norm.HGRD" },
-	[SchemeFlexInaDWDL]  = { "#D9CFC5", "#492B2D", "#643B3E", "norm.DWDL" },
-	[SchemeFlexInaDWDLC] = { "#D9CFC5", "#492B2D", "#643B3E", "norm.DWDLC" },
-	[SchemeFlexInaSPRL]  = { "#D9CFC5", "#492B2D", "#643B3E", "norm.SPRL" },
-	[SchemeFlexInaSPRLC] = { "#D9CFC5", "#492B2D", "#643B3E", "norm.SPRLC" },
-	[SchemeFlexInaTTMI]  = { "#D9CFC5", "#492B2D", "#643B3E", "norm.TTMI" },
-	[SchemeFlexInaTTMIC] = { "#D9CFC5", "#492B2D", "#643B3E", "norm.TTMIC" },
-	[SchemeFlexInaFloat] = { "#D9CFC5", "#492B2D", "#643B3E", "norm.float" },
-	[SchemeFlexSelTTB]   = { "#D9CFC5", "#82363A", "#82363A", "sel.TTB" },
-	[SchemeFlexSelLTR]   = { "#D9CFC5", "#82363A", "#82363A", "sel.LTR" },
-	[SchemeFlexSelMONO]  = { "#D9CFC5", "#82363A", "#82363A", "sel.MONO" },
-	[SchemeFlexSelGRID]  = { "#D9CFC5", "#82363A", "#82363A", "sel.GRID" },
-	[SchemeFlexSelGRIDC] = { "#D9CFC5", "#82363A", "#82363A", "sel.GRIDC" },
-	[SchemeFlexSelGRD1]  = { "#D9CFC5", "#82363A", "#82363A", "sel.GRD1" },
-	[SchemeFlexSelGRD2]  = { "#D9CFC5", "#82363A", "#82363A", "sel.GRD2" },
-	[SchemeFlexSelGRDM]  = { "#D9CFC5", "#82363A", "#82363A", "sel.GRDM" },
-	[SchemeFlexSelHGRD]  = { "#D9CFC5", "#82363A", "#82363A", "sel.HGRD" },
-	[SchemeFlexSelDWDL]  = { "#D9CFC5", "#82363A", "#82363A", "sel.DWDL" },
-	[SchemeFlexSelDWDLC] = { "#D9CFC5", "#82363A", "#82363A", "sel.DWDLC" },
-	[SchemeFlexSelSPRL]  = { "#D9CFC5", "#82363A", "#82363A", "sel.SPRL" },
-	[SchemeFlexSelSPRLC] = { "#D9CFC5", "#82363A", "#82363A", "sel.SPRLC" },
-	[SchemeFlexSelTTMI]  = { "#D9CFC5", "#82363A", "#82363A", "sel.TTMI" },
-	[SchemeFlexSelTTMIC] = { "#D9CFC5", "#82363A", "#82363A", "sel.TTMIC" },
-	[SchemeFlexSelFloat] = { "#D9CFC5", "#82363A", "#82363A", "sel.float" },
+	/*                       fg         bg         border    */
+	[SchemeNorm]         = { "#D9CFC5", "#492B2D", "#492B2D" },
+	[SchemeTitleNorm]    = { "#D9CFC5", "#492B2D", "#643B3E" },
+	[SchemeTitleSel]     = { "#D9CFC5", "#82363A", "#82363A" },
+	[SchemeScratchNorm]  = { "#D9CFC5", "#492B2D", "#643B3E" },
+	[SchemeScratchSel]   = { "#D9CFC5", "#82363A", "#82363A" },
+	[SchemeHidNorm]      = { "#D9CFC5", "#492B2D", "#000000" },
+	[SchemeHidSel]       = { "#D9CFC5", "#82363A", "#000000" },
+	[SchemeUrg]          = { "#E0E0E0", "#A23419", "#A23419" },
+	[SchemeMarked]       = { "#DDC470", "#724559", "#724559" },
+	[SchemeWsNorm]       = { "#D9CFC5", "#492B2D", "#000000" },
+	[SchemeWsVisible]    = { "#D9CFC5", "#82363A", "#000000" },
+	[SchemeWsSel]        = { "#D9CFC5", "#82363A", "#000000" },
+	[SchemeWsOcc]        = { "#D9CFC5", "#492B2D", "#000000" },
 };
 
 /* List of programs to start automatically during startup only. Note that these will not be
@@ -257,17 +209,19 @@ static const Rule clientrules[] = {
 	{ .wintype = WTYPE "TOOLBAR", .flags = AlwaysOnTop|Centered|Floating },
 	{ .wintype = WTYPE "SPLASH", .flags = AlwaysOnTop|Centered|Floating },
 	{ .instance = "spterm (w)", .scratchkey = 'w', .flags = Floating, .floatpos = "50% 0% 80% 37%"},
-	{ .instance = "spterm (e)", .scratchkey = 'e', .flags = Floating, .floatpos = "100% 0% 45% 100%"  },
-	{ .instance = "spterm (t)", .scratchkey = 't', .flags = Floating, .floatpos = "50% 50% 40% 50%"  },
+	{ .instance = "spterm (e)", .scratchkey = 'e', .flags = Floating, .floatpos = "50% 0% 60% 60%"  },
+	{ .instance = "spterm (t)", .scratchkey = 't', .flags = Floating, .floatpos = "50% 50% 70% 60%"  },
 	{ .instance = "spfm (r)", .scratchkey = 'r', .flags = Floating, .floatpos = "50% 0% 40% 35%"  },
 	{ .instance = "spvol (v)", .scratchkey = 'v', .flags = Floating, .floatpos = "50% 0% 35% 20%"  },
+	{ .class = "firefox", .role = "GtkFileChooserDialog", .floatpos = "50% 50%", .flags = AlwaysOnTop|Floating },
+	{ .class = "firefox", .workspace = "1", .flags = AttachMaster|SwitchWorkspace },
 	{ .class = "Slack", .workspace = "4", .flags = SwitchWorkspace },
 	{ .class = "Spotify", .workspace = "6", .flags = SwitchWorkspace },
-	{ .class = "firefox", .workspace = "1", .flags = AttachMaster|SwitchWorkspace },
-	{ .class = "firefox", .role = "GtkFileChooserDialog", .floatpos = "50% 50%", .flags = AlwaysOnTop|Floating },
 	{ .class = "Steam", .flags = Floating|Centered },
 	{ .class = "floating", .flags = Floating|Centered },
 	{ .class = "1Password", .flags = Floating},
+	{ .class = "Arandr", .flags = Floating},
+	{ .class = "Lxappearance", .flags = Floating},
 	{ .class = "Galculator", .flags = Floating, .floatpos = "50% 50%" },
 	{ .class = "steam_app_", .flags = SteamGame|Floating|Centered },
 	{ .class = "Google-chrome", .role = "GtkFileChooserDialog", .floatpos = "50% 50%", .flags = AlwaysOnTop|Floating },
@@ -332,11 +286,11 @@ static const Rule clientrules[] = {
 static const BarDef bars[] = {
 	/* monitor idx  vert   x     y      w     h     name  */
 	{  0,      0,   0,    "0%    0%     100% -1h ", "Primary top" },
-	{  0,      1,   0,    "0%    100%   100% -1h ", "Primary bottom" },
-	{  1,      0,   0,    "0%    0%     100% -1h ", "Secondary top" },
-	{  1,      1,   0,    "0%    100%   100% -1h ", "Secondary bottom" },
-	{  2,      0,   0,    "0%    0%     100% -1h ", "Tertiary top" },
-	{  2,      1,   0,    "0%    100%   100% -1h ", "Tertiary bottom" },
+	// {  0,      1,   0,    "0%    100%   100% -1h ", "Primary bottom" },
+	// {  1,      0,   0,    "0%    0%     100% -1h ", "Secondary top" },
+	// {  1,      1,   0,    "0%    100%   100% -1h ", "Secondary bottom" },
+	// {  2,      0,   0,    "0%    0%     100% -1h ", "Tertiary top" },
+	// {  2,      1,   0,    "0%    100%   100% -1h ", "Tertiary bottom" },
 };
 
 /* Bar rules allow you to configure what is shown where on the bar, as well as
@@ -420,6 +374,8 @@ static const int enablegaps  = 1;    /* whether gaps are enabled by default or n
 /* layout(s) */
 static const Layout layouts[] = {
 	/* symbol     arrange function, { nmaster, nstack, layout, master axis, stack axis, secondary stack axis, symbol func }, name */
+	{ "|M|",      flextile,         { -1, -1, SPLIT_CENTERED_VERTICAL, LEFT_TO_RIGHT, TOP_TO_BOTTOM, TOP_TO_BOTTOM, NULL }, "centeredmaster" },
+	{ "TTT",      flextile,         { -1, -1, SPLIT_HORIZONTAL, LEFT_TO_RIGHT, LEFT_TO_RIGHT, 0, NULL }, "bstack" },
 	{ "[]=",      flextile,         { -1, -1, SPLIT_VERTICAL, TOP_TO_BOTTOM, TOP_TO_BOTTOM, 0, NULL }, "tile" },
 	{ "|||",      flextile,         { -1, -1, NO_SPLIT, LEFT_TO_RIGHT, LEFT_TO_RIGHT, 0, NULL }, "columns" },
 	{ "===",      flextile,         { -1, -1, NO_SPLIT, TOP_TO_BOTTOM, TOP_TO_BOTTOM, 0, NULL }, "rows" },
@@ -427,10 +383,8 @@ static const Layout layouts[] = {
 	{ "||=",      flextile,         { -1, -1, SPLIT_VERTICAL, LEFT_TO_RIGHT, TOP_TO_BOTTOM, 0, NULL }, "col" },
 	{ ">M>",      flextile,         { -1, -1, FLOATING_MASTER, LEFT_TO_RIGHT, LEFT_TO_RIGHT, 0, NULL }, "floating master" },
 	{ "[D]",      flextile,         { -1, -1, SPLIT_VERTICAL, TOP_TO_BOTTOM, MONOCLE, 0, NULL }, "deck" },
-	{ "TTT",      flextile,         { -1, -1, SPLIT_HORIZONTAL, LEFT_TO_RIGHT, LEFT_TO_RIGHT, 0, NULL }, "bstack" },
 	{ "===",      flextile,         { -1, -1, SPLIT_HORIZONTAL, LEFT_TO_RIGHT, TOP_TO_BOTTOM, 0, NULL }, "bstackhoriz" },
 	{ "==#",      flextile,         { -1, -1, SPLIT_HORIZONTAL, TOP_TO_BOTTOM, GAPPLESSGRID_CFACTS, 0, NULL }, "bstackgrid" },
-	{ "|M|",      flextile,         { -1, -1, SPLIT_CENTERED_VERTICAL, LEFT_TO_RIGHT, TOP_TO_BOTTOM, TOP_TO_BOTTOM, NULL }, "centeredmaster" },
 	{ "-M-",      flextile,         { -1, -1, SPLIT_CENTERED_HORIZONTAL, TOP_TO_BOTTOM, LEFT_TO_RIGHT, LEFT_TO_RIGHT, NULL }, "centeredmaster horiz" },
 	{ ":::",      flextile,         { -1, -1, NO_SPLIT, GAPPLESSGRID_CFACTS, GAPPLESSGRID_CFACTS, 0, NULL }, "gappless grid" },
 	{ "[\\]",     flextile,         { -1, -1, NO_SPLIT, DWINDLE_CFACTS, DWINDLE_CFACTS, 0, NULL }, "fibonacci dwindle" },
@@ -481,12 +435,8 @@ static const char *termcmd[]  = { NULL, "st", NULL };
 static const char *dmenucmd[] = {
 	NULL,
 	"dmenu_run",
-	"-fn", dmenufont,
-	"-nb", dmenunormbgcolor,
-	"-nf", dmenunormfgcolor,
-	"-sb", dmenuselbgcolor,
-	"-sf", dmenuselfgcolor,
-//	"-bb", dmenubordercolor,
+  "-l", "7",
+  "-c",
 	NULL
 };
 static const char *spcmd_w[] = {"w", "st", "-n", "spterm (w)", NULL };
@@ -494,14 +444,13 @@ static const char *spcmd_e[] = {"e", "st", "-n", "spterm (e)", NULL };
 static const char *spcmd_t[] = {"t", "st", "-n", "spterm (t)", NULL };
 static const char *spcmd_r[] = {"r", "st", "-n", "spfm (r)", "-e", "ranger", NULL };
 static const char *spcmd_v[] = {"v", "st", "-n", "spvol (v)", "-e", "pulsemixer", NULL };
-static const char *statusclickcmd[] = { NULL, "bin/statusbar/statusclick.sh", NULL };
+static const char *statusclickcmd[] = { NULL, "/home/frank/.local/bin/statusbar/statusclick.sh", NULL };
 static const char *clipboard_menu[] = {NULL, "/home/frank/.local/bin/clipboard-menu", NULL };
 static const char *power_menu[] = {NULL, "/home/frank/.local/bin/power-menu", NULL };
 static const char *favorites_menu[] = {NULL, "/home/frank/.local/bin/favorites-menu", NULL };
 static const char *favorites_menu_apps[] = {NULL, "/home/frank/.local/bin/favorites-apps-menu", NULL };
 static const char *keyboard_switcher[] = {NULL, "/home/frank/.local/bin/keyboard-swithcer-menu", NULL };
 static const char *screenshots_menu[] = {NULL, "/home/frank/.local/bin/screenshots-menu", "-m", NULL };
-static const char *launcher[] = {NULL, "rofi", "-show", "drun", "-p", "Run", NULL };
 static const char *upvol[] = { NULL, "pulsemixer", "--change-volume", "+5", NULL };
 static const char *downvol[] = { NULL, "pulsemixer", "--change-volume", "-5", NULL };
 static const char *togglevol[] = { NULL, "pulsemixer", "--toggle-mute", NULL };
@@ -513,12 +462,11 @@ static const char *playerplaypause[] = { NULL, "playerctl", "play-pause", NULL }
 
 static Key keys[] = {
 	/* type       modifier                      key              function                argument */
-	{ KeyPress,   MODKEY|Shift,                 XK_p,            spawn,                  {.v = dmenucmd } },
+	{ KeyPress,   MODKEY,                       XK_p,            spawn,                  {.v = dmenucmd } },
 	{ KeyPress,   MODKEY,                       XK_Return,       spawn,                  {.v = termcmd } }, // spawn a terminal
 	{ KeyPress,   MODKEY|Shift,                 XK_Return,       riospawn,               {.v = termcmd } }, // draw/spawn a terminal
 	{ KeyPress,   MODKEY,                       XK_b,            togglebar,              {0} }, // toggles the display of the bar(s) on the current monitor
   /* personal */
-	{ KeyPress,   MODKEY,                       XK_p,            spawn,                  {.v = launcher } },
   { KeyPress,   Ctrl|Alt,                     XK_h,            spawn,                  {.v = clipboard_menu } },
   { KeyPress,   Ctrl|Alt,                     XK_x,            spawn,                  {.v = power_menu } },
   { KeyPress,   Ctrl|Alt,                     XK_e,            spawn,                  {.v = favorites_menu } },

@@ -1,7 +1,9 @@
 Merge branch 'master' into customize
-
-# Conflicts:
-#	config.def.h
+# Please enter a commit message to explain why this merge is necessary,
+# especially if it merges an updated upstream into a topic branch.
+#
+# Lines starting with '#' will be ignored, and an empty message aborts
+# the commit.
 #
 # It looks like you may be committing a merge.
 # If this is not correct, please run
@@ -16,12 +18,12 @@ Merge branch 'master' into customize
 # All conflicts fixed but you are still merging.
 #
 # Changes to be committed:
+#	modified:   Makefile
 #	modified:   config.def.h
+#	modified:   config.mk
 #	modified:   dusk.c
-#	modified:   lib/ewmh.c
-#	modified:   lib/renamed_scratchpads.c
+#	modified:   lib/bar_systray.c
+#	modified:   lib/ipc/ipc.c
 #	modified:   lib/workspace.c
-#	modified:   lib/workspace.h
-#	modified:   util.c
-#	modified:   util.h
+#	modified:   lib/xrdb.c
 #
