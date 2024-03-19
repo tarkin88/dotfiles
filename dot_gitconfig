@@ -7,8 +7,3 @@
 [user]
 	email = franksg88@gmail.com
 	name = Francisco Suarez
-	signingkey = 20DF8C51B82310B8
-[commit]
-	gpgsign = true
-[gpg]
-	program = /usr/bin/gpg
