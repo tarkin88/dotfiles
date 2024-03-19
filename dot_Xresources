@@ -1,10 +1,9 @@
-Xft.dpi:       96
+Xft.dpi:       105
 Xft.rgba:      rgba
 Xft.antialias: 1
 Xft.hinting:   1
 Xft.autohint:  0
 *.font: JetBrainsMono Nerd Font:pixelsize=18:antialias=true:autohint=true:hintstyle=hintmedium
 
-#include "/home/frank/.Xresources.d/dusk.resources/themes/dark/everforest.res"
+#include "/home/frank/.Xresources.d/dusk.resources/themes/dark/rose-pine-moon.res"
 #include "/home/frank/.Xresources.d/dusk.resources/themes/template.txt"
-
