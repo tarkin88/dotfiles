@@ -11,7 +11,7 @@ super + shift + Return
 
 # program launcher
 super + p
-  rofi -show drun
+  dmenu_run -l 7 -c 
 # command launcher
 super + shift + p
   rofi -show run
