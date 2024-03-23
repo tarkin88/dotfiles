@@ -26,6 +26,13 @@ comboviewwsbyname(const Arg *arg)
 }
 
 void
+comboviewwsbyindex(const Arg *arg)
+{
+	viewwsonmon(getwsbyindex(arg), NULL, combo);
+	combo = 1;
+}
+
+void
 createworkspaces()
 {
 	Workspace *pws, *ws;
@@ -51,8 +58,10 @@ createworkspaces()
 	num_workspaces = i;
 
 	for (m = mons, ws = workspaces; ws; ws = ws->next) {
-		if (ws->mon == NULL)
+		if (ws->mon == NULL) {
 			ws->mon = m;
+			m = (m->next == NULL ? mons : m->next);
+		}
 
 		ws->wx = ws->mon->wx;
 		ws->wy = ws->mon->wy;
@@ -60,11 +69,10 @@ createworkspaces()
 		ws->ww = ws->mon->ww;
 		ws->orientation = ws->mon->orientation;
 
-		if (m->selws == NULL) {
-			m->selws = ws;
-			m->selws->visible = 1;
+		if (ws->mon->selws == NULL) {
+			ws->mon->selws = ws;
+			ws->visible = 1;
 		}
-		m = (m->next == NULL ? mons : m->next);
 	}
 	attachws(stickyws, workspaces);
 	setworkspaceareas();
@@ -83,6 +91,10 @@ createworkspace(int num, const WorkspaceRule *r)
 
 	if (r->monitor != -1) {
 		for (m = mons; m && m->num != r->monitor; m = m->next);
+		if (!m && workspaces_per_mon && r->pinned) {
+			m = dummymon;
+			ws->pinned = r->pinned;
+		}
 		ws->mon = m;
 		if (r->pinned > 0 && m && m->num == r->monitor)
 			ws->pinned = 1;
@@ -112,6 +124,27 @@ createworkspace(int num, const WorkspaceRule *r)
 	getworkspacestate(ws);
 
 	return ws;
+}
+
+void
+handleabandoned(Workspace *ws)
+{
+	Workspace *target;
+
+	if (workspaces_per_mon && ws->pinned) {
+		ws->visible = 0;
+		hidewsclients(ws->stack);
+		target = mons->selws;
+		if (!target || target == stickyws)
+			for (target = workspaces; target == stickyws; target = target->next);
+		moveallclientstows(ws, target, 0);
+		ws->mon = dummymon;
+		return;
+	}
+
+	assignworkspacetomonitor(ws, mons);
+	ws->visible = 0;
+	ws->pinned = 0;
 }
 
 char *
@@ -178,7 +211,7 @@ viewwsmask(Monitor *m, uint64_t wsmask)
 void
 storewsmask(void)
 {
-	Monitor *m = selws->mon;
+	Monitor *m = selws ? selws->mon : selmon;
 	uint64_t wsmask = getwsmask(m);
 
 	if (m->prevwsmask == wsmask && m->wsmask)
@@ -385,6 +418,12 @@ swapwsbyname(const Arg *arg)
 }
 
 void
+swapwsbyindex(const Arg *arg)
+{
+	swapwsclients(selws, getwsbyindex(arg));
+}
+
+void
 swapwsclients(Workspace *ws1, Workspace *ws2)
 {
 	Client *c1, *c2;
@@ -531,9 +570,21 @@ movetowsbyname(const Arg *arg)
 }
 
 void
+movetowsbyindex(const Arg *arg)
+{
+	movetows(selws->sel, getwsbyindex(arg), 1);
+}
+
+void
 sendtowsbyname(const Arg *arg)
 {
 	movetows(selws->sel, getwsbyname(arg), 0);
+}
+
+void
+sendtowsbyindex(const Arg *arg)
+{
+	movetows(selws->sel, getwsbyindex(arg), 0);
 }
 
 void
@@ -543,9 +594,21 @@ movealltowsbyname(const Arg *arg)
 }
 
 void
+movealltowsbyindex(const Arg *arg)
+{
+	moveallclientstows(selws, getwsbyindex(arg), enabled(ViewOnWs));
+}
+
+void
 moveallfromwsbyname(const Arg *arg)
 {
 	moveallclientstows(getwsbyname(arg), selws, 0);
+}
+
+void
+moveallfromwsbyindex(const Arg *arg)
+{
+	moveallclientstows(getwsbyindex(arg), selws, 0);
 }
 
 /* Send client to an adjacent workspace on the current monitor */
@@ -601,6 +664,12 @@ enablewsbyname(const Arg *arg)
 }
 
 void
+enablewsbyindex(const Arg *arg)
+{
+	viewwsonmon(getwsbyindex(arg), NULL, 1);
+}
+
+void
 viewws(const Arg *arg)
 {
 	viewwsonmon((Workspace*)arg->v, NULL, 0);
@@ -642,6 +711,12 @@ void
 viewwsbyname(const Arg *arg)
 {
 	viewwsonmon(getwsbyname(arg), NULL, 0);
+}
+
+void
+viewwsbyindex(const Arg *arg)
+{
+	viewwsonmon(getwsbyindex(arg), NULL, 0);
 }
 
 void
@@ -816,14 +891,31 @@ getwsbyname(const Arg *arg)
 	Workspace *ws;
 	char *wsname = (char*)arg->v;
 	for (ws = workspaces; ws && strcmp(ws->name, wsname) != 0; ws = ws->next);
+	if (workspaces_per_mon && ws && ws->mon == dummymon)
+		return NULL;
 	return ws;
 }
 
 Workspace *
-getwsbyindex(int index)
+getwsbyindex(const Arg *arg)
 {
 	Workspace *ws;
-	for (ws = workspaces; ws && ws->num != index; ws = ws->next);
+	int index = arg->i;
+	int i = 0;
+	for (ws = workspaces; ws; ws = ws->next) {
+		if (ws->mon != selmon || ws == stickyws)
+			continue;
+		if (++i == index)
+			return ws;
+	}
+	return NULL;
+}
+
+Workspace *
+getwsbynum(int num)
+{
+	Workspace *ws;
+	for (ws = workspaces; ws && ws->num != num; ws = ws->next);
 	return ws;
 }
 
@@ -894,8 +986,10 @@ redistributeworkspaces(void)
 
 	/* Set selected workspaces for monitors, if not already set */
 	for (m = mons; m; m = m->next) {
-		if (m->selws)
+		if (m->selws) {
+			m->selws->visible = 1;
 			continue;
+		}
 		ws = nextvismonws(m, workspaces);
 		if (!ws)
 			ws = nextmonws(m, workspaces);

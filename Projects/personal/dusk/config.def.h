@@ -1,14 +1,14 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx       = 3;   /* border pixel of windows */
+static const unsigned int borderpx       = 5;   /* border pixel of windows */
 static const unsigned int snap           = 32;  /* snap pixel */
 static const unsigned int gappih         = 5;   /* horiz inner gap between windows */
 static const unsigned int gappiv         = 5;   /* vert inner gap between windows */
 static const unsigned int gappoh         = 5;   /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov         = 5;   /* vert outer gap between windows and screen edge */
 static const unsigned int gappfl         = 5;   /* gap between floating windows (when relevant) */
-static const unsigned int smartgaps_fact = 4;   /* smartgaps factor when there is only one client; 0 = no gaps, 3 = 3x outer gaps */
+static const unsigned int smartgaps_fact = 0;   /* smartgaps factor when there is only one client; 0 = no gaps, 3 = 3x outer gaps */
 
 static unsigned int attachdefault        = AttachAside; // AttachMaster, AttachAbove, AttachAside, AttachBelow, AttachBottom
 
@@ -31,7 +31,7 @@ static const int vertpadbar              = 0;   /* vertical (inner) padding for 
 
 static const char slopspawnstyle[]       = "-t 0 -c 0.92,0.85,0.69,0.3 -o"; /* do NOT define -f (format) here */
 static const char slopresizestyle[]      = "-t 0 -c 0.92,0.85,0.69,0.3"; /* do NOT define -f (format) here */
-static const unsigned int systrayspacing = 3;   /* systray spacing */
+static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const char *toggle_float_pos      = "50% 50% 80% 80%"; // default floating position when triggering togglefloating
 static const double defaultopacity       = 0;   /* client default opacity, e.g. 0.75. 0 means don't apply opacity */
 static const double moveopacity          = 0;   /* client opacity when being moved, 0 means don't apply opacity */
@@ -39,7 +39,7 @@ static const double resizeopacity        = 0;   /* client opacity when being res
 static const double placeopacity         = 0;   /* client opacity when being placed, 0 means don't apply opacity */
 
 /* Indicators: see lib/bar_indicators.h for options */
-static int wsindicatortype               = INDICATOR_BOTTOM_BAR_SLIM;
+static int wsindicatortype               = INDICATOR_NONE;
 static int wspinnedindicatortype         = INDICATOR_NONE;
 static int fakefsindicatortype           = INDICATOR_PLUS;
 static int floatfakefsindicatortype      = INDICATOR_PLUS_AND_LARGER_SQUARE;
@@ -55,29 +55,38 @@ static char *custom_2d_indicator_5 = "^c#CB9700^^r0,h,w,1^^r0,0,w,1^"; // top an
 static char *custom_2d_indicator_6 = "^c#F0A523^^r6,2,1,-4^^r-6,2,1,-4^"; // orange vertical bars
 
 /* The below are only used if the WorkspaceLabels functionality is enabled */
-static char *occupied_workspace_label_format = "%s: %s";  /* format of a workspace label */
-static char *vacant_workspace_label_format = "%s";        /* format of an empty / vacant workspace */
-static int lowercase_workspace_labels = 1;                /* whether to change workspace labels to lower case */
-static int prefer_window_icons_over_workspace_labels = 0; /* whether to use window icons instead of labels if present */
+static char *occupied_workspace_label_format = "%s: %s";     /* format of a workspace label */
+static char *vacant_workspace_label_format = "%s";           /* format of an empty / vacant workspace */
+static int lowercase_workspace_labels = 1;                   /* whether to change workspace labels to lower case */
+static int prefer_window_icons_over_workspace_labels = 0;    /* whether to use window icons instead of labels if present */
 static int swap_occupied_workspace_label_format_strings = 0; /* 0 gives "icon: label", 1 gives "label: icon" */
+
+/* This determines what happens with pinned workspaces on a monitor when that monitor is removed.
+ *   0 - the workspaces becomes unpinned and is moved to another monitor or
+ *   1 - the workspace clients are moved to the selected workspace on the first monitor, but
+ *       the workspace itself is hidden
+ *
+ * Non-pinned workspaces are always redistributed among the remaining monitors.
+ */
+static const int workspaces_per_mon = 0;
 
 /* See util.h for options */
 static uint64_t functionality = 0
 //	|AutoReduceNmaster // automatically reduce the number of master clients if one is closed
 //	|BanishMouseCursor // like xbanish, hides mouse cursor when using the keyboard
 //	|BanishMouseCursorToCorner // makes BanishMouseCursor move the cursor to the top right corner of the screen
-	|SmartGaps // enables no or increased gaps if there is only one visible window
+//	|SmartGaps // enables no or increased gaps if there is only one visible window
 //	|SmartGapsMonocle // enforces no gaps in monocle layout
 	|Systray // enables a systray in the bar
 //	|SystrayNoAlpha // disables the use of transparency for the systray, enable if you do not use a compositor
 	|Swallow // allows X applications started from the command line to swallow the terminal
 	|SwallowFloating // allow floating windows to swallow the terminal by default
 	|CenteredWindowName // center the window titles on the bar
-//	|BarActiveGroupBorderColor // use border color of active group, otherwise title scheme is used
-	|BarMasterGroupBorderColor // use border color of master group, otherwise title scheme is used
-	|FlexWinBorders // use the SchemeFlex* color schemes, falls back to SchemeTitle* if disabled
+//	|BarActiveGroupBorderColor // use border color of active group for the bar, otherwise normal scheme is used
+//	|BarMasterGroupBorderColor // use border color of master group for the bar, otherwise normal scheme is used
+//	|FlexWinBorders // use the SchemeFlex* color schemes, falls back to SchemeTitle* if disabled
 	|SpawnCwd // spawn applications in the currently selected client's working directory
-// 	|ColorEmoji // enables color emoji support (removes Xft workaround)
+	|ColorEmoji // enables color emoji support (removes Xft workaround)
 //	|Status2DNoAlpha // option to not use alpha when drawing status2d status
 	|BarBorder // draw a border around the bar
 	|BarPadding // add vertical and side padding as per vertpad and sidepad variables above
@@ -101,7 +110,7 @@ static uint64_t functionality = 0
 //	|GreedyMonitor // disables swap of workspaces between monitors
 	|SmartLayoutConvertion // automatically adjust layout based on monitor orientation when moving a workspace from one monitor to another
 //	|AutoHideScratchpads // automatically hide open scratchpads when moving to another workspace
-	|RioDrawIncludeBorders // indicates whether the area drawn using slop includes the window borders
+//	|RioDrawIncludeBorders // indicates whether the area drawn using slop includes the window borders
 //	|RioDrawSpawnAsync // spawn the application alongside rather than after drawing area using slop
 //	|RestrictFocusstackToMonitor // restrict focusstack to only operate within the monitor, otherwise focus can drift between monitors
 //	|WinTitleIcons // adds application icons to window titles in the bar
@@ -115,13 +124,14 @@ static int flexwintitle_hiddenweight     = 0;  // hidden window title weight
 static int flexwintitle_floatweight      = 0;  // floating window title weight, set to 0 to not show floating windows
 static int flexwintitle_separator        = 0;  // width of client separator
 
-static const char *fonts[]               = { "monospace:size=11" };
-static       char dmenufont[]            = "monospace:size=11";
+static const char *fonts[]               = { "monospace:size=10" };
+static       char dmenufont[60]          = "monospace:size=10";
 
-static char dmenunormfgcolor[] = "#BE89AE";
-static char dmenunormbgcolor[] = "#180A13";
-static char dmenuselfgcolor[] = "#FFF7D4";
-static char dmenuselbgcolor[] = "#440000";
+static char dmenunormfgcolor[] = "#D9CFC5";
+static char dmenunormbgcolor[] = "#492B2D";
+static char dmenuselfgcolor[] = "#D9CFC5";
+static char dmenuselbgcolor[] = "#82363A";
+static char dmenubordercolor[] = "#492B2D";
 
 /* Xresources preferences to load at startup. */
 static const ResourcePref resources[] = {
@@ -129,80 +139,34 @@ static const ResourcePref resources[] = {
 	{ "dmenu.norm.bg.color", STRING, &dmenunormbgcolor },
 	{ "dmenu.sel.fg.color", STRING, &dmenuselfgcolor },
 	{ "dmenu.sel.bg.color", STRING, &dmenuselbgcolor },
+	{ "dmenu.border.bg.color", STRING, &dmenubordercolor },
 	{ "dmenu.font", STRING, &dmenufont },
 };
 
+/* Default opacity levels         fg      bg     border */
 unsigned int default_alphas[] = { OPAQUE, 0xd0U, OPAQUE };
 
 static char *colors[SchemeLast][4] = {
-	/*                       fg         bg         border     resource prefix */
-	[SchemeNorm]         = { "#BE89AE", "#180A13", "#444444", "norm" },
-	[SchemeSel]          = { "#FFF7D4", "#440000", "#440000", "sel" },
-	[SchemeTitleNorm]    = { "#C6BDBD", "#180A13", "#180A13", "titlenorm" },
-	[SchemeTitleSel]     = { "#FFF7D4", "#440000", "#440000", "titlesel" },
-	[SchemeWsNorm]       = { "#BE89AE", "#180A13", "#000000", "wsnorm" },
-	[SchemeWsVisible]    = { "#BE89AE", "#5E294B", "#000000", "wsvis" },
-	[SchemeWsSel]        = { "#D8B2CD", "#6F3A5C", "#000000", "wssel" },
-	[SchemeWsOcc]        = { "#BE89AE", "#180A13", "#000000", "wsocc" },
-	[SchemeHidNorm]      = { "#c278b6", "#222222", "#000000", "hidnorm" },
-	[SchemeHidSel]       = { "#D288C6", "#111111", "#000000", "hidsel" },
-	[SchemeUrg]          = { "#bbbbbb", "#222222", "#d10f3f", "urg" },
-	[SchemeMarked]       = { "#615656", "#ECB820", "#ECB820", "marked" },
-	[SchemeScratchNorm]  = { "#FFF7D4", "#664C67", "#77547E", "scratchnorm" },
-	[SchemeScratchSel]   = { "#FFF7D4", "#77547E", "#894B9F", "scratchsel" },
-	[SchemeFlexActTTB]   = { "#FFF7D4", "#440000", "#440000", "act.TTB" },
-	[SchemeFlexActLTR]   = { "#FFF7D4", "#440044", "#440044", "act.LTR" },
-	[SchemeFlexActMONO]  = { "#FFF7D4", "#000044", "#000044", "act.MONO" },
-	[SchemeFlexActGRID]  = { "#FFF7D4", "#004400", "#004400", "act.GRID" },
-	[SchemeFlexActGRIDC] = { "#FFF7D4", "#004400", "#004400", "act.GRIDC" },
-	[SchemeFlexActGRD1]  = { "#FFF7D4", "#004400", "#004400", "act.GRD1" },
-	[SchemeFlexActGRD2]  = { "#FFF7D4", "#004400", "#004400", "act.GRD2" },
-	[SchemeFlexActGRDM]  = { "#FFF7D4", "#507711", "#507711", "act.GRDM" },
-	[SchemeFlexActHGRD]  = { "#FFF7D4", "#b97711", "#b97711", "act.HGRD" },
-	[SchemeFlexActDWDL]  = { "#FFF7D4", "#004444", "#004444", "act.DWDL" },
-	[SchemeFlexActDWDLC] = { "#FFF7D4", "#004444", "#004444", "act.DWDLC" },
-	[SchemeFlexActSPRL]  = { "#FFF7D4", "#444400", "#444400", "act.SPRL" },
-	[SchemeFlexActSPRLC] = { "#FFF7D4", "#444400", "#444400", "act.SPRLC" },
-	[SchemeFlexActTTMI]  = { "#FFF7D4", "#B81616", "#B81616", "act.TTMI" },
-	[SchemeFlexActTTMIC] = { "#FFF7D4", "#B81616", "#B81616", "act.TTMIC" },
-	[SchemeFlexActFloat] = { "#FFF7D4", "#4C314C", "#4C314C", "act.float" },
-	[SchemeFlexInaTTB]   = { "#C6BDBD", "#330000", "#330000", "norm.TTB" },
-	[SchemeFlexInaLTR]   = { "#C6BDBD", "#330033", "#330033", "norm.LTR" },
-	[SchemeFlexInaMONO]  = { "#C6BDBD", "#000033", "#000033", "norm.MONO" },
-	[SchemeFlexInaGRID]  = { "#C6BDBD", "#003300", "#003300", "norm.GRID" },
-	[SchemeFlexInaGRIDC] = { "#C6BDBD", "#003300", "#003300", "norm.GRIDC" },
-	[SchemeFlexInaGRD1]  = { "#C6BDBD", "#003300", "#003300", "norm.GRD1" },
-	[SchemeFlexInaGRD2]  = { "#C6BDBD", "#003300", "#003300", "norm.GRD2" },
-	[SchemeFlexInaGRDM]  = { "#C6BDBD", "#506600", "#506600", "norm.GRDM" },
-	[SchemeFlexInaHGRD]  = { "#C6BDBD", "#b96600", "#b96600", "norm.HGRD" },
-	[SchemeFlexInaDWDL]  = { "#C6BDBD", "#003333", "#003333", "norm.DWDL" },
-	[SchemeFlexInaDWDLC] = { "#C6BDBD", "#003333", "#003333", "norm.DWDLC" },
-	[SchemeFlexInaSPRL]  = { "#C6BDBD", "#333300", "#333300", "norm.SPRL" },
-	[SchemeFlexInaSPRLC] = { "#C6BDBD", "#333300", "#333300", "norm.SPRLC" },
-	[SchemeFlexInaTTMI]  = { "#C6BDBD", "#B32727", "#B32727", "norm.TTMI" },
-	[SchemeFlexInaTTMIC] = { "#C6BDBD", "#B32727", "#B32727", "norm.TTMIC" },
-	[SchemeFlexInaFloat] = { "#C6BDBD", "#4C314C", "#4C314C", "norm.float" },
-	[SchemeFlexSelTTB]   = { "#FFF7D4", "#550000", "#550000", "sel.TTB" },
-	[SchemeFlexSelLTR]   = { "#FFF7D4", "#550055", "#550055", "sel.LTR" },
-	[SchemeFlexSelMONO]  = { "#FFF7D4", "#212171", "#212171", "sel.MONO" },
-	[SchemeFlexSelGRID]  = { "#FFF7D4", "#005500", "#005500", "sel.GRID" },
-	[SchemeFlexSelGRIDC] = { "#FFF7D4", "#005500", "#005500", "sel.GRIDC" },
-	[SchemeFlexSelGRD1]  = { "#FFF7D4", "#005500", "#005500", "sel.GRD1" },
-	[SchemeFlexSelGRD2]  = { "#FFF7D4", "#005500", "#005500", "sel.GRD2" },
-	[SchemeFlexSelGRDM]  = { "#FFF7D4", "#508822", "#508822", "sel.GRDM" },
-	[SchemeFlexSelHGRD]  = { "#FFF7D4", "#b98822", "#b98822", "sel.HGRD" },
-	[SchemeFlexSelDWDL]  = { "#FFF7D4", "#005555", "#005555", "sel.DWDL" },
-	[SchemeFlexSelDWDLC] = { "#FFF7D4", "#005555", "#005555", "sel.DWDLC" },
-	[SchemeFlexSelSPRL]  = { "#FFF7D4", "#555500", "#555500", "sel.SPRL" },
-	[SchemeFlexSelSPRLC] = { "#FFF7D4", "#555500", "#555500", "sel.SPRLC" },
-	[SchemeFlexSelTTMI]  = { "#FFF7D4", "#C91717", "#C91717", "sel.TTMI" },
-	[SchemeFlexSelTTMIC] = { "#FFF7D4", "#C91717", "#C91717", "sel.TTMIC" },
-	[SchemeFlexSelFloat] = { "#FFF7D4", "#5C415C", "#5C415C", "sel.float" },
+	/*                       fg         bg         border    */
+	[SchemeNorm]         = { "#D9CFC5", "#492B2D", "#492B2D" },
+	[SchemeTitleNorm]    = { "#D9CFC5", "#492B2D", "#643B3E" },
+	[SchemeTitleSel]     = { "#D9CFC5", "#82363A", "#82363A" },
+	[SchemeScratchNorm]  = { "#D9CFC5", "#492B2D", "#643B3E" },
+	[SchemeScratchSel]   = { "#D9CFC5", "#82363A", "#82363A" },
+	[SchemeHidNorm]      = { "#D9CFC5", "#492B2D", "#000000" },
+	[SchemeHidSel]       = { "#D9CFC5", "#82363A", "#000000" },
+	[SchemeUrg]          = { "#E0E0E0", "#A23419", "#A23419" },
+	[SchemeMarked]       = { "#DDC470", "#724559", "#724559" },
+	[SchemeWsNorm]       = { "#D9CFC5", "#492B2D", "#000000" },
+	[SchemeWsVisible]    = { "#D9CFC5", "#82363A", "#000000" },
+	[SchemeWsSel]        = { "#D9CFC5", "#82363A", "#000000" },
+	[SchemeWsOcc]        = { "#D9CFC5", "#492B2D", "#000000" },
 };
 
 /* List of programs to start automatically during startup only. Note that these will not be
  * executed again when doing a restart. */
 static const char *const autostart[] = {
+//	"st", NULL,
 	NULL /* terminate */
 };
 
@@ -244,20 +208,16 @@ static const Rule clientrules[] = {
 	{ .wintype = WTYPE "UTILITY", .flags = AlwaysOnTop|Centered|Floating },
 	{ .wintype = WTYPE "TOOLBAR", .flags = AlwaysOnTop|Centered|Floating },
 	{ .wintype = WTYPE "SPLASH", .flags = AlwaysOnTop|Centered|Floating },
-	{ .instance = "spterm (w)", .scratchkey = 'w', .flags = Floating, .floatpos = "0% 0% 45% 100%" },
-	{ .instance = "spterm (e)", .scratchkey = 'e', .flags = Floating, .floatpos = "100% 0% 45% 100%"  },
-	{ .instance = "spterm (t)", .scratchkey = 't', .flags = Floating, .floatpos = "50% 50% 40% 50%"  },
-	{ .instance = "spfm (r)", .scratchkey = 'r', .flags = Floating, .floatpos = "50% 0% 40% 35%"  },
-	{ .instance = "spvol (v)", .scratchkey = 'v', .flags = Floating, .floatpos = "50% 0% 35% 20%"  },
-	{ .class = "Slack", .workspace = "4" },
-  { .class = "Spotify", .workspace = "6", .flags = SwitchWorkspace},
-	{ .class = "firefox",.flags = AttachMaster},
+	{ .instance = "spterm (w)", .scratchkey = 'w', .flags = Floating },
+	{ .instance = "spterm (e)", .scratchkey = 'e', .flags = Floating },
+	{ .instance = "spfm (r)", .scratchkey = 'r', .flags = Floating },
+	{ .class = "Gimp", .workspace = "5", .flags = Floating|SwitchWorkspace },
+	{ .class = "firefox", .workspace = "8", .flags = AttachMaster|SwitchWorkspace },
 	{ .class = "Steam", .flags = Floating|Centered },
 	{ .class = "steam_app_", .flags = SteamGame|Floating|Centered },
-	{ .class = "1Password", .flags = Floating|Centered },
 	{ .class = "Google-chrome", .role = "GtkFileChooserDialog", .floatpos = "50% 50%", .flags = AlwaysOnTop|Floating },
 	{ .role = "pop-up", .flags = AlwaysOnTop|Floating|Centered },
-	{ .role = "browser", .flags = AttachBelow|OnlyModButtons|SwitchWorkspace },
+	{ .role = "browser", .workspace = "8", .flags = AttachBelow|OnlyModButtons|SwitchWorkspace },
 	{ .class = "Gnome-terminal", .role = "gnome-terminal-preferences", .flags = Centered },
 	{ .class = "Diffuse", .workspace = "4", .flags = NoSwallow|SwitchWorkspace|RevertWorkspace },
 	{ .class = "File-roller", .workspace = "9", .flags = Centered|Floating|SwitchWorkspace|RevertWorkspace },
@@ -340,27 +300,42 @@ static const BarDef bars[] = {
  *    sizefunc, drawfunc, clickfunc - providing bar module width, draw and click functions
  *    name - does nothing, intended for visual clue and for logging / debugging
  */
-// #define PWRL PwrlForwardSlash
+#define PWRL PwrlForwardSlash
 static const BarRule barrules[] = {
 	/* monitor  bar    scheme   lpad rpad value  alignment               sizefunc                  drawfunc                 clickfunc                 hoverfunc                 name */
-	{ -1,       0,     0,       0,   0,   0,     BAR_ALIGN_LEFT,         size_workspaces,          draw_workspaces,         click_workspaces,         hover_workspaces,         "workspaces" },
-	{  0,       0,     6,       5,   5,   0,     BAR_ALIGN_RIGHT,        size_systray,             draw_systray,            click_systray,            NULL,                     "systray" },
-	{ -1,       0,     5,       0,   0,   0,     BAR_ALIGN_LEFT,         size_ltsymbol,            draw_ltsymbol,           click_ltsymbol,           NULL,                     "layout" },
-	{  0,       0,     0,       5,   5,   0,     BAR_ALIGN_RIGHT,        size_status,              draw_status,             click_status,             NULL,                     "status0" },
-	{  0,       0,     0,       5,   5,   1,     BAR_ALIGN_RIGHT,        size_status,              draw_status,             click_status,             NULL,                     "status1" },
-	{  0,       0,     0,       5,   5,   2,     BAR_ALIGN_RIGHT,        size_status,              draw_status,             click_status,             NULL,                     "status2" },
-	{  0,       0,     0,       5,   5,   3,     BAR_ALIGN_RIGHT,        size_status,              draw_status,             click_status,             NULL,                     "status3" },
-	{  0,       0,     0,       5,   5,   4,     BAR_ALIGN_RIGHT,        size_status,              draw_status,             click_status,             NULL,                     "status4" },
-	{  0,       0,     0,       5,   5,   5,     BAR_ALIGN_RIGHT,        size_status,              draw_status,             click_status,             NULL,                     "status5" },
-	{  0,       0,     0,       5,   5,   6,     BAR_ALIGN_RIGHT,        size_status,              draw_status,             click_status,             NULL,                     "status6" },
+	{ -1,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_LEFT,         size_powerline,           draw_powerline,          NULL,                     NULL,                     "powerline join" },
 	{  0,       0,     0,       5,   5,   7,     BAR_ALIGN_LEFT,         size_status,              draw_status,             click_status,             NULL,                     "status7" },
+	{  0,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_LEFT,         size_powerline,           draw_powerline,          NULL,                     NULL,                     "powerline join" },
+	{ -1,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_LEFT,         size_workspaces,          draw_workspaces,         click_workspaces,         hover_workspaces,         "workspaces" },
+	{  0,       0,     6,       5,   5,   0,     BAR_ALIGN_RIGHT,        size_systray,             draw_systray,            click_systray,            NULL,                     "systray" },
+	{  0,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_RIGHT,        size_powerline,           draw_powerline,          NULL,                     NULL,                     "powerline join" },
+	{ -1,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_LEFT,         size_powerline,           draw_powerline,          NULL,                     NULL,                     "powerline join" },
+	{ -1,       0,     5,       0,   0,   0,     BAR_ALIGN_LEFT,         size_ltsymbol,            draw_ltsymbol,           click_ltsymbol,           NULL,                     "layout" },
+	{ -1,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_LEFT,         size_powerline,           draw_powerline,          NULL,                     NULL,                     "powerline join" },
+	{  0,       0,     0,       5,   5,   0,     BAR_ALIGN_RIGHT,        size_status,              draw_status,             click_status,             NULL,                     "status0" },
+	{  0,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_RIGHT,        size_powerline,           draw_powerline,          NULL,                     NULL,                     "powerline join" },
+	{  0,       0,     0,       5,   5,   1,     BAR_ALIGN_RIGHT,        size_status,              draw_status,             click_status,             NULL,                     "status1" },
+	{  0,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_RIGHT,        size_powerline,           draw_powerline,          NULL,                     NULL,                     "powerline join" },
+	{  0,       0,     0,       5,   5,   2,     BAR_ALIGN_RIGHT,        size_status,              draw_status,             click_status,             NULL,                     "status2" },
+	{  0,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_RIGHT,        size_powerline,           draw_powerline,          NULL,                     NULL,                     "powerline join" },
+	{  0,       0,     0,       5,   5,   3,     BAR_ALIGN_RIGHT,        size_status,              draw_status,             click_status,             NULL,                     "status3" },
+	{  0,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_RIGHT,        size_powerline,           draw_powerline,          NULL,                     NULL,                     "powerline join" },
+	{  0,       0,     0,       5,   5,   4,     BAR_ALIGN_RIGHT,        size_status,              draw_status,             click_status,             NULL,                     "status4" },
+	{  0,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_RIGHT,        size_powerline,           draw_powerline,          NULL,                     NULL,                     "powerline join" },
+	{  0,       0,     0,       5,   5,   5,     BAR_ALIGN_RIGHT,        size_status,              draw_status,             click_status,             NULL,                     "status5" },
+	{  0,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_RIGHT,        size_powerline,           draw_powerline,          NULL,                     NULL,                     "powerline join" },
+	{  0,       0,     0,       5,   5,   6,     BAR_ALIGN_RIGHT,        size_status,              draw_status,             click_status,             NULL,                     "status6" },
+	{  0,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_RIGHT,        size_powerline,           draw_powerline,          NULL,                     NULL,                     "powerline join" },
 	{  0,       0,     0,       5,   5,   8,     BAR_ALIGN_RIGHT,        size_status,              draw_status,             click_status,             NULL,                     "status8" },
+	{  0,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_RIGHT,        size_powerline,           draw_powerline,          NULL,                     NULL,                     "powerline join" },
 	{  0,       0,     0,       5,   5,   9,     BAR_ALIGN_RIGHT,        size_status,              draw_status,             click_status,             NULL,                     "status9" },
-	{ -1,       0,     0,       0,   0,   0,     BAR_ALIGN_NONE,         size_wintitle_sticky,     draw_wintitle_sticky,    click_wintitle_sticky,    NULL,                     "wintitle_sticky" },
-	{ -1,       0,     0,       0,   0,   0,     BAR_ALIGN_NONE,         size_flexwintitle,        draw_flexwintitle,       click_flexwintitle,       NULL,                     "flexwintitle" },
+	{ -1,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_RIGHT,        size_powerline,           draw_powerline,          NULL,                     NULL,                     "powerline join" },
+	{ -1,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_NONE,         size_wintitle_sticky,     draw_wintitle_sticky,    click_wintitle_sticky,    NULL,                     "wintitle_sticky" },
+	{ -1,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_NONE,         size_flexwintitle,        draw_flexwintitle,       click_flexwintitle,       NULL,                     "flexwintitle" },
 
-	{ -1,       1,     0,       0,   0,   0,     BAR_ALIGN_RIGHT_RIGHT,  size_wintitle_hidden,     draw_wintitle_hidden,    click_wintitle_hidden,    NULL,                     "wintitle_hidden" },
-	{ -1,       1,     0,       0,   0,   0,     BAR_ALIGN_LEFT_LEFT,    size_wintitle_floating,   draw_wintitle_floating,  click_wintitle_floating,  NULL,                     "wintitle_floating" },
+	{ -1,       1,     0,       0,   0,   PWRL,  BAR_ALIGN_CENTER,       size_pwrl_ifhidfloat,     draw_powerline,          NULL,                     NULL,                     "powerline join" },
+	{ -1,       1,     0,       0,   0,   PWRL,  BAR_ALIGN_RIGHT_RIGHT,  size_wintitle_hidden,     draw_wintitle_hidden,    click_wintitle_hidden,    NULL,                     "wintitle_hidden" },
+	{ -1,       1,     0,       0,   0,   PWRL,  BAR_ALIGN_LEFT_LEFT,    size_wintitle_floating,   draw_wintitle_floating,  click_wintitle_floating,  NULL,                     "wintitle_floating" },
 };
 
 /* Workspace rules define what workspaces are available and their properties.
@@ -385,18 +360,18 @@ static const BarRule barrules[] = {
 static const WorkspaceRule wsrules[] = {
 	/*                                                                     ------------------------------- schemes ------------------------------- ------ icons ------
 	   name,  monitor,  pinned,  layout,  mfact,  nmaster,  nstack,  gaps, default,          visible,          selected,         occupied,         def,   vac,  occ,  */
-	{  "1",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "1",   "",   "1", },
-	{  "2",   -1,       0,       9,       .60,   -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "2",   "",   "2", },
-	{  "3",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "3",   "",   "3", },
-	{  "4",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "4",   "",   "4", },
-	{  "5",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "5",   "",   "5", },
-	{  "6",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "6",   "",   "6", },
-	{  "7",   -1,       0,       10,      .75,   -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "7",   "",   "7", },
-	{  "8",   -1,       0,       1,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "8",   "",   "8", },
-	{  "9",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "9",   "",   "9", },
+	{  "1",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "1",   "",   "[1]", },
+	{  "2",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "2",   "",   "[2]", },
+	{  "3",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "3",   "",   "[3]", },
+	{  "4",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "4",   "",   "[4]", },
+	{  "5",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "5",   "",   "[5]", },
+	{  "6",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "6",   "",   "[6]", },
+	{  "7",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "7",   "",   "[7]", },
+	{  "8",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "8",   "",   "[8]", },
+	{  "9",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "9",   "",   "[9]", },
 };
 
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int nstack      = 0;    /* number of clients in primary stack area */
 static const int enablegaps  = 1;    /* whether gaps are enabled by default or not */
@@ -462,10 +437,6 @@ static const Layout layouts[] = {
 
 /* Scratch/Spawn commands:        NULL (scratchkey), command, argument, argument, ..., NULL */
 static const char *termcmd[]  = { NULL, "st", NULL };
-static const char *powermenu[]  = { NULL, "/home/frank/.local/bin/dmenu-power", NULL };
-static const char *kblayoutmenu[]  = { NULL, "/home/frank/.local/bin/dmenu-keyboard", NULL };
-static const char *clipboardcmd[] = { NULL, "/home/frank/.local/bin/dmenu-clipboard", NULL };
-static const char *screenshotsmenu[] = { NULL, "/home/frank/.local/bin/dmenu-screenshots", "-m", NULL };
 static const char *dmenucmd[] = {
 	NULL,
 	"dmenu_run",
@@ -474,37 +445,42 @@ static const char *dmenucmd[] = {
 	"-nf", dmenunormfgcolor,
 	"-sb", dmenuselbgcolor,
 	"-sf", dmenuselfgcolor,
-  "-l", "7",
+//	"-bb", dmenubordercolor,
 	NULL
 };
+// static const char *spcmd_w[] = {"w", "st", "-n", "spterm (w)", "-g", "120x34", NULL };
+// static const char *spcmd_e[] = {"e", "st", "-n", "spterm (e)", "-g", "120x34", NULL };
+// static const char *spcmd_r[] = {"r", "st", "-n", "spfm (r)", "-g", "144x41", "-e", "ranger", NULL };
+// static const char *statusclickcmd[] = { NULL, "bin/statusbar/statusclick.sh", NULL };
 
-
+// My commands
 static const char *spcmd_w[] = {"w", "st", "-n", "spterm (w)", NULL };
 static const char *spcmd_e[] = {"e", "st", "-n", "spterm (e)", NULL };
 static const char *spcmd_t[] = {"t", "st", "-n", "spterm (t)", NULL };
-static const char *spcmd_r[] = {"r", "st", "-n", "spfm (r)","-e", "ranger", NULL };
+static const char *spcmd_r[] = {"r", "st", "-n", "spfm (r)", "-e", "ranger", NULL };
 static const char *spcmd_v[] = {"v", "st", "-n", "spvol (v)", "-e", "pulsemixer", NULL };
-static const char *statusclickcmd[] = { NULL, "bin/statusbar/statusclick.sh", NULL };
-
+static const char *statusclickcmd[] = { NULL, "/home/frank/.local/bin/statusbar/statusclick.sh", NULL };
+static const char *clipboard_menu[] = {NULL, "/home/frank/.local/bin/clipboard-menu", NULL };
+static const char *power_menu[] = {NULL, "/home/frank/.local/bin/power-menu", NULL };
+static const char *favorites_menu[] = {NULL, "/home/frank/.local/bin/favorites-menu", NULL };
+static const char *favorites_menu_apps[] = {NULL, "/home/frank/.local/bin/favorites-apps-menu", NULL };
+static const char *keyboard_switcher[] = {NULL, "/home/frank/.local/bin/keyboard-swithcer-menu", NULL };
+static const char *screenshots_menu[] = {NULL, "/home/frank/.local/bin/screenshots-menu", "-m", NULL };
 static const char *upvol[] = { NULL, "pulsemixer", "--change-volume", "+5", NULL };
 static const char *downvol[] = { NULL, "pulsemixer", "--change-volume", "-5", NULL };
 static const char *togglevol[] = { NULL, "pulsemixer", "--toggle-mute", NULL };
-
 static const char *playernext[] = { NULL, "playerctl", "next", NULL };
 static const char *playerprev[] = { NULL, "playerctl", "previous", NULL };
 static const char *playerplaypause[] = { NULL, "playerctl", "play-pause", NULL };
+
 #include <X11/XF86keysym.h>
+
 
 static Key keys[] = {
 	/* type       modifier                      key              function                argument */
-	{ KeyPress,   MODKEY,                       XK_p,            spawn,                  {.v = dmenucmd } }, // spawn dmenu for launching other programs
+	{ KeyPress,   MODKEY,                       XK_d,            spawn,                  {.v = dmenucmd } }, // spawn dmenu for launching other programs
 	{ KeyPress,   MODKEY,                       XK_Return,       spawn,                  {.v = termcmd } }, // spawn a terminal
 	{ KeyPress,   MODKEY|Shift,                 XK_Return,       riospawn,               {.v = termcmd } }, // draw/spawn a terminal
-	{ KeyPress,   Ctrl|Alt,                     XK_h,            spawn,                  {.v = clipboardcmd } }, // spawn clipboard manager
-	{ KeyPress,   Ctrl|Alt,                     XK_x,            spawn,                  {.v = powermenu } }, // spawn clipboard manager
-	{ KeyPress,   Ctrl|Alt,                     XK_space,        spawn,                  {.v = kblayoutmenu } }, // spawn keyboard layout swithcer
-	{ KeyPress,   0,                            XK_Print,        spawn,                  {.v = screenshotsmenu } }, // spawn screenshotsmenu
-
 	{ KeyPress,   MODKEY,                       XK_b,            togglebar,              {0} }, // toggles the display of the bar(s) on the current monitor
 
 	{ KeyPress,   MODKEY,                       XK_j,            focusstack,             {.i = +1 } }, // focus on the next client in the stack
@@ -534,12 +510,12 @@ static Key keys[] = {
 
 	{ KeyPress,   MODKEY,                       XK_backslash,    togglepinnedws,         {0} }, // toggle pinning of currently selected workspace on the current monitor
 	{ KeyPress,   MODKEY,                       XK_z,            showhideclient,         {0} }, // hide the currently selected client (or show if hidden)
-	{ KeyPress,   MODKEY|Shift,                 XK_c,            killclient,             {0} }, // close the currently focused window
+	{ KeyPress,   MODKEY,                       XK_q,            killclient,             {0} }, // close the currently focused window
 	{ KeyPress,   MODKEY|Shift,                 XK_q,            restart,                {0} }, // restart dusk
 	{ KeyPress,   MODKEY|Ctrl|Alt,              XK_q,            quit,                   {0} }, // exit dusk
 
-	// { KeyPress,   MODKEY,                       XK_v,            group,                  {0} }, // groups floating clients together
-	// { KeyPress,   MODKEY|Shift,                 XK_v,            ungroup,                {0} }, // ungroups floating clients
+	{ KeyPress,   MODKEY,                       XK_v,            group,                  {0} }, // groups floating clients together
+	{ KeyPress,   MODKEY|Shift,                 XK_v,            ungroup,                {0} }, // ungroups floating clients
 
 	{ KeyPress,   MODKEY,                       XK_a,            markall,                {0} }, // marks all clients on the selected workspace
 	{ KeyPress,   MODKEY|Ctrl,                  XK_a,            markall,                {1} }, // marks all floating clients on the selected workspace
@@ -582,10 +558,9 @@ static Key keys[] = {
 	{ KeyPress,   MODKEY,                       XK_comma,        viewwsdir,              {.i = -2 } }, // view the next workspace left of current workspace that has clients (on the current monitor)
 	{ KeyPress,   MODKEY,                       XK_period,       viewwsdir,              {.i = +2 } }, // view the next workspace right of current workspace that has clients (on the current monitor)
 	{ KeyPress,   MODKEY|Shift,                 XK_Tab,          viewwsdir,              {.i = -2 } }, // view the next workspace left of current workspace that has clients (on the current monitor)
-	// { KeyPress,   MODKEY,                       XK_Tab,          viewwsdir,              {.i = +2 } }, // view the next workspace right of current workspace that has clients (on the current monitor)
+	{ KeyPress,   MODKEY,                       XK_Tab,          viewwsdir,              {.i = +2 } }, // view the next workspace right of current workspace that has clients (on the current monitor)
 	{ KeyPress,   MODKEY|Ctrl|Alt,              XK_comma,        movewsdir,              {.i = -1 } }, // move client to workspace on the immediate left of current workspace (on the current monitor)
 	{ KeyPress,   MODKEY|Ctrl|Alt,              XK_period,       movewsdir,              {.i = +1 } }, // move client to workspace on the immediate right of current workspace (on the current monitor)
-	{ KeyPress,   MODKEY|Shift,                 XK_s,            togglesticky,           {0} }, // makes a client show on all workspaces)
 
 //	STACKKEYS(AltGr|Ctrl,                                        stackfocus)                           // focus on the nth client in the stack, see the STACKKEYS macro for keybindings
 //	STACKKEYS(AltGr|Ctrl|Shift,                                  stackpush)                            // move the currently focused client to the nth place in the stack
@@ -593,9 +568,7 @@ static Key keys[] = {
 
 	SCRATCHKEYS(MODKEY,                         XK_w,            spcmd_w)
 	SCRATCHKEYS(MODKEY,                         XK_e,            spcmd_e)
-	SCRATCHKEYS(MODKEY,                         XK_t,            spcmd_t)
 	SCRATCHKEYS(MODKEY,                         XK_r,            spcmd_r)
-	SCRATCHKEYS(MODKEY,                         XK_v,            spcmd_v)
 
 	WSKEYS(MODKEY,                              XK_1,            "1")
 	WSKEYS(MODKEY,                              XK_2,            "2")
@@ -648,17 +621,6 @@ static Key keys[] = {
 //	{ KeyPress,   MODKEY,                       XK_,             xrdb,                   {0 } }, // reloads colors from XResources
 //	{ KeyPress,   MODKEY,                       XK_,             swallow,                {0} }, // makes the focused client swallow marked clients
 //	{ KeyPress,   MODKEY,                       XK_,             unswallow,              {0} }, // makes the focused client unswallow the most recently swallowed client
-	{ KeyPress,   MODKEY|Shift,                 XK_space,        togglefloating,         {0} }, // toggle floating  
-	{ KeyPress,   MODKEY,                       XK_Tab,          togglews,              {0} }, // view the next workspace right of current workspace that has clients (on the current monitor)
-
-	{ KeyPress,   0,                            XF86XK_AudioRaiseVolume,                 spawn,                  {.v = upvol } }, // raise volume
-	{ KeyPress,   0,                            XF86XK_AudioLowerVolume,                 spawn,                  {.v = downvol } }, // lower volume
-	{ KeyPress,   0,                            XF86XK_AudioMute,                        spawn,                  {.v = togglevol } }, // toggle volume
-	{ KeyPress,   0,                            XF86XK_AudioNext,                        spawn,                  {.v = playernext } }, // next song
-	{ KeyPress,   0,                            XF86XK_AudioPrev,                        spawn,                  {.v = playerprev } }, // prev song
-	{ KeyPress,   0,                            XF86XK_AudioPlay,                        spawn,                  {.v = playerplaypause } }, // toggle player
-
-
 };
 
 /* button definitions */
@@ -686,12 +648,12 @@ static Button buttons[] = {
 	{ ClkClientWin,              MODKEY,                  Button8,        markmouse,        {1} }, // toggles marking of clients under the mouse cursor for group action
 	{ ClkClientWin,              MODKEY,                  Button9,        markmouse,        {0} }, // unmarks clients under the mouse cursor
 	{ ClkClientWin,              MODKEY,                  Button1,        moveorplace,      {1} }, // moves a client window into a floating or tiled position depending on floating state
-	{ ClkClientWin,              MODKEY|Shift,            Button1,        movemouse,        {0} }, // moves a floating window, if the window is tiled then it will snap out to become floating
+	{ ClkClientWin,              MODKEY|Shift,            Button1,        togglemoveorplace,{0} }, // as above, but forces a tiled client to become floating and vice versa
 	{ ClkClientWin,              MODKEY|Alt,              Button2,        togglefloating,   {0} }, // toggles between tiled and floating arrangement for given client
 	{ ClkClientWin,              MODKEY,                  Button3,        resizeorfacts,    {0} }, // change the size of a floating client window or adjust cfacts and mfacts when tiled
 	{ ClkClientWin,              MODKEY|Shift,            Button3,        resizemouse,      {0} }, // change the size of a floating client window
-	// { ClkClientWin,              0,                       Button8,        movemouse,        {0} }, // move a client window using extra mouse buttons (previous)
-	// { ClkClientWin,              0,                       Button9,        resizemouse,      {0} }, // resize a client window using extra mouse buttons (next)
+	{ ClkClientWin,              0,                       Button8,        movemouse,        {0} }, // move a client window using extra mouse buttons (previous)
+	{ ClkClientWin,              0,                       Button9,        resizemouse,      {0} }, // resize a client window using extra mouse buttons (next)
 	{ ClkClientWin,              MODKEY,                  Button2,        zoom,             {0} }, // moves the currently focused window to/from the master area (for tiled layouts)
 	{ ClkClientWin,              MODKEY|Ctrl,             Button1,        dragmfact,        {0} }, // dynamically change the size of the master area compared to the stack area(s)
 	{ ClkRootWin,                MODKEY|Ctrl,             Button1,        dragmfact,        {0} }, // dynamically change the size of the master area compared to the stack area(s)
@@ -718,6 +680,7 @@ static IPCCommand ipccommands[] = {
 	IPCCOMMAND( clientstomon, ARG_TYPE_SINT ),
 	IPCCOMMAND( cyclelayout, ARG_TYPE_SINT ),
 	IPCCOMMAND( enable, ARG_TYPE_STR ),
+	IPCCOMMAND( enablewsbyindex, ARG_TYPE_SINT ),
 	IPCCOMMAND( enablewsbyname, ARG_TYPE_STR ),
 	IPCCOMMAND( defaultgaps, ARG_TYPE_NONE ),
 	IPCCOMMAND( disable, ARG_TYPE_STR ),
@@ -744,9 +707,13 @@ static IPCCommand ipccommands[] = {
 	IPCCOMMAND( mark, ARG_TYPE_NONE ),
 	IPCCOMMAND( markall, ARG_TYPE_SINT ), // 0 = mark all, 1 = mark floating, 2 = mark hidden
 	IPCCOMMAND( mirrorlayout, ARG_TYPE_NONE ),
+	IPCCOMMAND( movetowsbyindex, ARG_TYPE_SINT ),
 	IPCCOMMAND( movetowsbyname, ARG_TYPE_STR ),
+	IPCCOMMAND( sendtowsbyindex, ARG_TYPE_SINT ),
 	IPCCOMMAND( sendtowsbyname, ARG_TYPE_STR ),
+	IPCCOMMAND( movealltowsbyindex, ARG_TYPE_SINT ),
 	IPCCOMMAND( movealltowsbyname, ARG_TYPE_STR ),
+	IPCCOMMAND( moveallfromwsbyindex, ARG_TYPE_SINT ),
 	IPCCOMMAND( moveallfromwsbyname, ARG_TYPE_STR ),
 	IPCCOMMAND( movewsdir, ARG_TYPE_SINT ),
 	IPCCOMMAND( rotatelayoutaxis, ARG_TYPE_SINT ),
@@ -773,6 +740,7 @@ static IPCCommand ipccommands[] = {
 	IPCCOMMAND( stackswap, ARG_TYPE_SINT ),
 	IPCCOMMAND( swallow, ARG_TYPE_NONE ),
 	IPCCOMMAND( switchcol, ARG_TYPE_NONE ),
+	IPCCOMMAND( swapwsbyindex, ARG_TYPE_SINT ),
 	IPCCOMMAND( swapwsbyname, ARG_TYPE_STR ),
 	IPCCOMMAND( toggle, ARG_TYPE_STR ), // toggle functionality on and off
 	IPCCOMMAND( togglebar, ARG_TYPE_NONE ),
@@ -797,6 +765,7 @@ static IPCCommand ipccommands[] = {
 	IPCCOMMAND( viewallwsonmon, ARG_TYPE_NONE ),
 	IPCCOMMAND( viewalloccwsonmon, ARG_TYPE_NONE ),
 	IPCCOMMAND( viewselws, ARG_TYPE_NONE ),
+	IPCCOMMAND( viewwsbyindex, ARG_TYPE_SINT ),
 	IPCCOMMAND( viewwsbyname, ARG_TYPE_STR ),
 	IPCCOMMAND( viewwsdir, ARG_TYPE_SINT ),
 	IPCCOMMAND( xrdb, ARG_TYPE_NONE ), // reload xrdb / Xresources

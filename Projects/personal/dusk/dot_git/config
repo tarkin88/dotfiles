@@ -4,8 +4,8 @@
 	bare = false
 	logallrefupdates = true
 [remote "origin"]
-	url = https://github.com/tarkin88/dusk
-	fetch = +refs/heads/*:refs/remotes/origin/*
+	url = git@github.com:tarkin88/dusk.git
+	fetch = +refs/heads/master:refs/remotes/origin/master
 [branch "master"]
 	remote = origin
 	merge = refs/heads/master
