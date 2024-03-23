@@ -2,12 +2,13 @@
 DIRS_OPTS="st -c floating -g 160x35 -e ranger"
 FILES_OPTS="st -c floating -g 170x40 -e nvim"
 
-case "$(echo -e "neovim\ndusk\nautostart\nbin\nprojects\npolybar" | dmenu -l 8 -c -i -p \
+case "$(echo -e "neovim\nbspwm\nsxhkd\nautostart\nbin\nprojects\npolybar" | dmenu -l 10 -c -i -p \
     "Open")" in
-        neovim) ${DIRS_OPTS} ~/.config/nvim/;;
-        dusk)  ${FILES_OPTS} ~/Projects/personal/dusk-fork/config.def.h;;
-        autostart) ${FILES_OPTS} ~/.local/bin/autostart.sh;;
         bin) ${DIRS_OPTS} ~/.local/bin/;;
         projects) ${DIRS_OPTS} ~/Projects/;;
         polybar) ${DIRS_OPTS} ~/.config/polybar/;;
+        neovim) ${DIRS_OPTS} ~/.config/nvim/;;
+        bspwm)  ${FILES_OPTS} ~/.config/bspwm/bspwmrc;;
+        sxhkd)  ${FILES_OPTS} ~/.config/sxhkd/sxhkdrc;;
+        autostart) ${FILES_OPTS} ~/.local/bin/autostart.sh;;
 esac

@@ -7,7 +7,7 @@ function restart {
 	fi
 	$1 $2 $3 $4 &
 }
-
+restart sxhkd
 restart dbus-launch --sh-syntax
 restart dunst
 restart betterlockscreen -w
@@ -20,8 +20,12 @@ xset -dpms
 xset s 840 900 # dim at 14 min and lock at 15 min
 xss-lock -n ~/.local/bin/notify-suspend -- betterlockscreen -l dimblur &
 sleep 2s
+restart polybar 
+sleep 1s
+restart nm-applet &
+restart blueman-applet &
 restart udiskie -as
-bash -c ~/.local/bin/status-updater.sh &
+
 
 if [ -f "$HOME/.local-machine" ]; then
 	source "$HOME/.local-machine"
