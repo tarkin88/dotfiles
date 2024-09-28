@@ -1,0 +1,10 @@
+#!/bin/env bash
+
+case "$(echo -e "Chrome\nSlack\nCode\nSpotify\n1Password" | dmenu -i -l 7 -c -p "Execute")" in
+Chrome) exec google-chrome-stable ;;
+Slack) exec slack ;;
+Spotify) exec spotify ;;
+1Password) exec 1password ;;
+# Datagrip) exec datagrip;;
+Code) exec code ;;
+esac
