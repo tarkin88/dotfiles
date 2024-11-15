@@ -1,5 +1,4 @@
 #!/bin/sh
-xrandr --output eDP-1 --off --output HDMI-1 --primary --mode 2560x1440 --pos 0x0 --rotate normal  &
 
 function restart {
 	if ps x | rg "$1" | awk '{print $1}'; then
