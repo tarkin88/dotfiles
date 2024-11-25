@@ -1,0 +1,19 @@
+[general]
+live_config_reload = false
+ipc_socket = false
+
+[window]
+padding= {x=15, y=15}
+dynamic_padding = true
+decorations = "None"
+opacity=0.97
+dynamic_title = false
+
+
+
+[font]
+normal= { family="JetBrainsMono Nerd Font"}
+size=14.0
+
+[scrolling]
+history=30000
