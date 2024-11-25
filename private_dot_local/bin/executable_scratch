@@ -1,0 +1,75 @@
+#!/bin/bash
+
+NAME="$1"
+FILENAME=/tmp/"$1"
+ALLOW_ONLY_ONE_PER_TIME=false
+
+bspc_write_nodeid() {
+  while true; do
+    flag=false
+    for id in $(bspc query -d focused -N -n .floating.sticky.hidden); do
+      bspc query --node $id -T | grep -q $NAME && {
+        echo $id >$FILENAME
+        flag=true
+        break
+      }
+    done
+    [[ "$flag" == "true" ]] && break
+    sleep 0.1s
+  done
+}
+
+hide_all_except_current() {
+  for id in $(bspc query -d focused -N -n .floating.sticky.!hidden); do
+    bspc query --node $id -T | grep -qv $NAME && bspc node $id --flag hidden=on
+  done
+}
+
+toggle_hidden() {
+  [ -e "$FILENAME" ] || exit 1
+  if [ "${ALLOW_ONLY_ONE_PER_TIME}" = true ]; then
+    hide_all_except_current
+  fi
+  id=$(<$FILENAME)
+  bspc node $id --flag hidden -f
+}
+
+create_terminal() {
+  local application=$1
+  local columns=${2:-100}
+  local lines=${3:-20}
+
+  alacritty --class="$NAME","$NAME" -o "window.dimensions={columns=${columns},lines=${lines}}" -e "${application}" &
+}
+
+if ! ps -ef | grep -q "[c]lass=$NAME"; then
+  bspc rule -a "$NAME" --one-shot state=floating sticky=on hidden=on
+  case "$NAME" in
+  "htop")
+    create_terminal htop
+    ;;
+  "ranger")
+    create_terminal ranger 140 25
+    ;;
+  "volume")
+    create_terminal pulsemixer
+    ;;
+  "terminal_one")
+    create_terminal $SHELL 300 40
+    ;;
+  "terminal_two")
+    create_terminal $SHELL 250 30
+    ;;
+  "terminal_three")
+    create_terminal $SHELL 260 50
+    ;;
+  *)
+    exit 1
+    ;;
+  esac
+  dunstify "Scratch: starting $NAME"
+  bspc_write_nodeid
+  toggle_hidden
+else
+  toggle_hidden
+fi
