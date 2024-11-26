@@ -6,10 +6,6 @@ if [ -d "$HOME/.local/bin" ]; then
   PATH="$HOME/.local/bin:$PATH"
 fi
 
-# if [ -d "/opt/google-cloud-cli/bin/" ]; then
-#   PATH="/opt/google-cloud-cli/bin:$PATH"
-# fi
-#
 if [ -d "$HOME/.yarn/bin" ]; then
   PATH="$HOME/.yarn/bin/:$PATH"
 fi
@@ -24,7 +20,7 @@ export EDITOR="nvim"
 export VISUAL=$EDITOR
 
 # FILE BROWSER
-export BROWSER="google-chrome-stable"
+export BROWSER="firefox"
 
 # TERM
 export TERM=st
@@ -46,7 +42,7 @@ export VKD3D_CONFIG=dxr11,dxr
 export PROTON_ENABLE_NVAPI=1
 export PROTON_ENABLE_NGX_UPDATER=1
 
-export CLUTTER_DEFAULT_FPS=144
+export CLUTTER_DEFAULT_FPS=75
 export __GL_SHADER_DISK_CACHE=1
 export __GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1
 export __GL_SYNC_DISPLAY_DEVICE=DP-2
