@@ -1,9 +1,8 @@
 #!/bin/env bash
 
-case "$(echo -e "Firefox\nSlack\nSpotify\n1Password\nSteam" | dmenu -i -l 7 -c -p "Execute")" in
-Firefox) exec firefox ;;
+case "$(echo -e "Firefox\nSlack\nSpotify\n1Password" | dmenu -i -l 7 -c -p "Execute")" in
+Firefox) exec ~/.local/bin/browser ;;
 Slack) exec slack ;;
 Spotify) exec spotify ;;
 1Password) exec 1password ;;
-Steam) exec steam-native ;;
 esac
