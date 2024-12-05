@@ -10,6 +10,9 @@ if [ -d "$HOME/.yarn/bin" ]; then
   PATH="$HOME/.yarn/bin/:$PATH"
 fi
 
+if [ -d "$HOME/.local/share/JetBrainsGateway/bin" ]; then
+  PATH="$HOME/.local/share/JetBrainsGateway/bin/:$PATH"
+fi
 # More explanation here
 # https://github.com/PCMan/gtk3-nocsd
 # You can use gtk3-mushrooms btw
@@ -23,7 +26,7 @@ export VISUAL=$EDITOR
 export BROWSER="firefox"
 
 # TERM
-export TERM=st
+export TERM="alacritty"
 
 export RANGER_LOAD_DEFAULT_RC=FALSE
 
@@ -35,14 +38,13 @@ export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
 export wname='LG3D'
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-# raytracing
-export DXVK_HUD=fps
-export VKD3D_CONFIG=dxr11,dxr
-export PROTON_ENABLE_NVAPI=1
-export PROTON_ENABLE_NGX_UPDATER=1
+#intel graphics 
+export LIBVA_DRIVER_NAME=i915
+# export MESA_LOADER_DRIVER_OVERRIDE=i915
+export MESA_GL_VERSION_OVERRIDE=4.6
+export MESA_NO_ERROR=1
 
-export CLUTTER_DEFAULT_FPS=75
-export __GL_SHADER_DISK_CACHE=1
-export __GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1
-export __GL_SYNC_DISPLAY_DEVICE=DP-2
-export __GL_SYNC_TO_VBLANK=0
+
+bash -c ~/.local/bin/autostart
+
+
