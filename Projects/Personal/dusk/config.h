@@ -173,7 +173,6 @@ static char *colors[SchemeLast][4] = {
 /* List of programs to start automatically during startup only. Note that these will not be
  * executed again when doing a restart. */
 static const char *const autostart[] = {
-        "/home/frank/.local/bin/autostart", // autostart script
 	NULL /* terminate */
 };
 
@@ -220,16 +219,11 @@ static const Rule clientrules[] = {
 	{ .instance = "spfm (r)", .scratchkey = 'r', .flags = Floating, .floatpos = "50% 50% 40% 35%" },
 	{ .instance = "spvol (v)", .scratchkey = 'v', .flags = Floating, .floatpos = "50% 100% 50% 30%" },
 	{ .instance = "spbt (t)", .scratchkey = 't', .flags = Floating, .floatpos = "50% 0% 25% 65%" },
-	{ .class = "firefox", .workspace = "1", .flags = AttachMaster|SwitchWorkspace },
+	{ .class = "Firefox", .workspace = "1", .flags = AttachMaster|SwitchWorkspace },
         { .class = "Slack", .workspace = "4", .flags = SwitchWorkspace },
 	{ .class = "1Password", .flags = Floating },
-	{ .class = "Steam", .flags = Floating|Centered },
-	{ .class = "steam_app_", .flags = SteamGame|Floating|Centered },
-	{ .class = "Steam", .flags = Floating|Centered },
-	{ .class = "steam_app_", .flags = SteamGame|Floating|Centered },
 	{ .role = "pop-up", .flags = AlwaysOnTop|Floating|Centered },
 	{ .class = "Alacritty", .flags = Terminal },
-	{ .class = "Xephyr", .flags = NoSwallow|Floating|Centered },
 };
 
 /* Bar settings, this defines what bars exists, their position, and what attributes they have.
@@ -449,7 +443,7 @@ static const char *spcmd_w[]            = {"w", "alacritty", "--class", "spterm 
 static const char *spcmd_e[]            = {"e", "alacritty", "--class", "spterm (e)", NULL };
 static const char *spcmd_grave[]        = {"`", "alacritty", "--class", "spterm (`)", NULL };
 static const char *spcmd_r[]            = {"r", "alacritty", "--class", "spfm (r)", "-e", "ranger", NULL };
-static const char *spcmd_v[]            = {"r", "alacritty", "--class", "spvol (v)", "-e", "pulsemixer", NULL };
+static const char *spcmd_v[]            = {"v", "alacritty", "--class", "spvol (v)", "-e", "pulsemixer", NULL };
 static const char *spcmd_t[]            = {"t", "alacritty", "--class", "spbt (t)", "-e", "bluetui", NULL };
 
 /* status */
