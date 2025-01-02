@@ -1,0 +1,8 @@
+0000000000000000000000000000000000000000 00961dbed13320f7dfeba6d90b30388fb47bf1ff Francisco Suarez <franksg88@gmail.com> 1734470098 -0600	commit (initial): feat: using snacks
+00961dbed13320f7dfeba6d90b30388fb47bf1ff d578efed7f06334e69b3d4bf7f73f1d73ddae6ce Francisco Suarez <franksg88@gmail.com> 1734630405 -0600	commit: feat: ui and base
+d578efed7f06334e69b3d4bf7f73f1d73ddae6ce 39c7e4c831fc444d877b92fcb9830c840f3472d4 Francisco Suarez <franksg88@gmail.com> 1734633899 -0600	commit: feat: terminal
+39c7e4c831fc444d877b92fcb9830c840f3472d4 ca6671eb470f125d32886efdfcb246fe8c73f9d0 Francisco Suarez <franksg88@gmail.com> 1734641601 -0600	commit: feat: fold and terms
+ca6671eb470f125d32886efdfcb246fe8c73f9d0 390b88c484c7924a2613fe365808174e2bda1d63 Francisco Suarez <franksg88@gmail.com> 1734641641 -0600	commit: chore: remove unused
+390b88c484c7924a2613fe365808174e2bda1d63 6adec46f8277bb85ed6fde65dfc61d6e963b351a Francisco Suarez <franksg88@gmail.com> 1734998242 -0600	commit: lsp
+6adec46f8277bb85ed6fde65dfc61d6e963b351a 6c9d05ec49135ab066cf44c5c66fe9c627cd3fed Francisco Suarez <franksg88@gmail.com> 1734998305 -0600	commit: lock
+6c9d05ec49135ab066cf44c5c66fe9c627cd3fed 0fd63047a81f0396f961ca816efbcbd6cf67dcf8 Francisco Suarez <franksg88@gmail.com> 1735070133 -0600	commit: chore: removing lock file
