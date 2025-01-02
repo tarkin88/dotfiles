@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+xrandr --output eDP-1 --off --output HDMI-1 --mode 3440x1440 --pos 0x0 --rotate normal &
+
+betterlockscreen -w &
+picom &
+udiskie -as &
+greenclip daemon &
+eval "$(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)" &
+/usr/libexec/polkit-gnome-authentication-agent-1 &
+set -dpms
+xset s 840 900 # dim at 14 min and lock at 15 min
+xss-lock -n ~/.local/bin/notify-suspend -- betterlockscreen -l dimblur &

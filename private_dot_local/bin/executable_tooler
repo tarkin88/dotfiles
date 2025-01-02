@@ -1,0 +1,79 @@
+#! /usr/bin/env bash
+
+menu_maker() {
+  local title="$1"
+  local options=("${@:2}") # Capture all arguments after the title
+  local choice
+  choice=$(printf "%s\n" "${options[@]}" | dmenu -l 5 -c -p "$title")
+  echo "$choice"
+}
+
+notification_maker() {
+  local title=$1
+  local msg=$2
+  local level=${3-"normal"} # could be: low, normal (default), critical
+
+  notify-send --urgency="${level}" --expire-time=0 --app-name="Tooler" "$title" "<i>$msg</i>"
+}
+
+terminal_window_maker() {
+  local command=$1
+  local geometry=${2-'100x20'}
+
+  st -n floating -g "$geometry" -e sh -ic "${command}; read -p 'Press Enter to close...'"
+}
+
+weather_menu() {
+  options=("current" "current full" "custom location")
+
+  chosen_option=$(menu_maker "weather" "${options[@]}")
+
+  case "${chosen_option}" in
+  current)
+    weather=$(curl "wttr.in?format=3")
+    notification_maker "Weather" "${weather}"
+    ;;
+  "current full")
+    terminal_window_maker "curl wttr.in/" "150x45"
+    ;;
+  "custom location")
+    # Get user input for location
+    location=$(echo "" | dmenu -p "Enter Location:" -c)
+
+    # Check if user canceled or entered an empty string (important for dmenu)
+    if [[ -z "$location" ]]; then
+      notification_maker "Error" "No location provided." "critical"
+      return 1
+    fi
+
+    terminal_window_maker "curl wttr.in/$location" "150x45"
+    ;;
+  esac
+}
+
+date_menu() {
+  options=("current month" "year")
+
+  chosen_option=$(menu_maker "Date" "${options[@]}")
+
+  case "${chosen_option}" in
+  "current month")
+    notification_maker "Current " "$(cal)"
+    ;;
+  "year")
+    terminal_window_maker "cal -y" "80x36"
+    ;;
+  esac
+}
+
+options=("weather" "date")
+chosen_option=$(menu_maker "Tools" "${options[@]}")
+
+case "$chosen_option" in
+weather)
+  weather_menu
+  ;;
+date)
+  date_menu
+  ;;
+esac

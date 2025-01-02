@@ -1,0 +1,13 @@
+#!/bin/bash
+
+case "$(echo -e "Poweroff\nReboot\nLogout\nSuspend\nLock" | dmenu -l 5 -i -c -p "Power")" in
+Poweroff) exec poweroff ;;
+Reboot) exec reboot ;;
+Logout) exec duskc run_command quit ;;
+Suspend)
+  exec xset s activate
+  sleep 1s
+  systemctl suspend
+  ;;
+Lock) exec xset s activate ;;
+esac
