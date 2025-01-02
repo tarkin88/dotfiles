@@ -1,0 +1,26 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+add_newline = true
+
+# format = """$character"""
+
+# move the rest of the prompt to the right
+# Which is equivalent to
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$direnv\
+$env_var\
+$cmd_duration\
+$line_break\
+$jobs\
+$status\
+$os\
+$shell\
+$character"""
+
