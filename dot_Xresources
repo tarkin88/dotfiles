@@ -1,0 +1,10 @@
+Xft.dpi:       110
+Xft.rgba:      rgba
+Xft.antialias: 1
+Xft.hinting:   1
+Xft.autohint:  0
+*.font: JetBrainsMono Nerd Font:pixelsize=19:antialias=true:autohint=true:hintstyle=hintmedium
+
+#include "/home/frank/.Xresources.d/themes/monokai-pro.res"
+#include "/home/frank/.Xresources.d/themes/template.txt"
+

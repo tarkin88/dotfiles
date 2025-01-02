@@ -1,0 +1,45 @@
+#!/bin/env bash
+XDG_CONFIG_HOME=$HOME/.config
+export XDG_CONFIG_HOME
+
+if [ -d "$HOME/.local/bin" ]; then
+  PATH="$HOME/.local/bin:$PATH"
+fi
+
+if [ -d "$HOME/.yarn/bin" ]; then
+  PATH="$HOME/.yarn/bin/:$PATH"
+fi
+
+if [ -d "$HOME/.local/share/JetBrainsGateway/bin" ]; then
+  PATH="$HOME/.local/share/JetBrainsGateway/bin/:$PATH"
+fi
+# More explanation here
+# https://github.com/PCMan/gtk3-nocsd
+# You can use gtk3-mushrooms btw
+export GTK_CSD=0
+
+# Editor and shits
+export EDITOR="nvim"
+export VISUAL=$EDITOR
+
+# FILE BROWSER
+export BROWSER="google-chrome-stable"
+
+# TERM
+export TERM="st"
+
+export RANGER_LOAD_DEFAULT_RC=FALSE
+
+export QT_QPA_PLATFORMTHEME=qt5ct
+
+# Don't minimize SDL games on focus loss
+export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+
+export wname='LG3D'
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+#intel graphics
+export LIBVA_DRIVER_NAME=i915
+# export MESA_LOADER_DRIVER_OVERRIDE=i915
+export MESA_GL_VERSION_OVERRIDE=4.6
+export MESA_NO_ERROR=1
