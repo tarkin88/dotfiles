@@ -1,0 +1,6 @@
+#! /usr/bin/env sh
+hex="$(xcolor | tr '[:lower:]' '[:upper:]')"
+[ "$hex" ] && (
+  magick -size 35x35 xc:$hex /tmp/xcolor.png
+  echo "$hex" | xclip -r -sel clipboard && notify-send -i /tmp/xcolor.png "Color picked" "$hex"
+)

@@ -66,7 +66,7 @@ date_menu() {
   esac
 }
 
-options=("weather" "date")
+options=("weather" "date" "color picker")
 chosen_option=$(menu_maker "Tools" "${options[@]}")
 
 case "$chosen_option" in
@@ -75,5 +75,8 @@ weather)
   ;;
 date)
   date_menu
+  ;;
+"color picker")
+  colorpicker
   ;;
 esac
