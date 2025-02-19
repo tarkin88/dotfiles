@@ -1,0 +1,15 @@
+[manager]
+ratio = [1, 4, 5]
+linemode = "size"
+
+[opener]
+play = [
+	{ run = 'mpv "$@"', orphan = true, for = "unix" },
+]
+edit = [
+	{ run = '$EDITOR "$@"', block = true},
+	{ run = 'helix "$@"', block = true},
+]
+open = [
+	{ run = 'xdg-open "$@"', desc = "Open" },
+]

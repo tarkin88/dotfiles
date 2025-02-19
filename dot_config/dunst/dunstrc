@@ -1,0 +1,46 @@
+[global]
+frame_color = "#212123"
+separator_color = frame
+notification_limit = 20
+origin = "top-center"
+offset = (0,45)
+icon_corner_radius = 10
+transparency = 0
+separator_height = 3
+frame_width = 1
+width = 280
+word_wrap = yes
+font = "Iosevka Nerd Font 12"
+browser = x-www-browser -new-tab
+mouse_left_click = do_action
+mouse_middle_click = close_all
+mouse_right_click = close_current
+
+icon_position = "left"
+min_icon_size = 60
+max_icon_size = 60
+timeout = 60
+
+[urgency_low]
+  foreground = "#ccd0d9"
+  background = "#212123"
+
+[urgency_normal]
+  foreground = "#ccd0d9"
+  background = "#212123"
+
+[urgency_critical]
+  foreground = "#ccd0d9"
+  background = "#212123"
+  frame_color = "#8ab4f8"
+
+[VolumeManager]
+  appname=VolumeManager
+  frame_color="#80e7db"
+  alignment = left
+
+[Spotify]
+  appname=Spotify
+  format = "<b>  %s</b>\n%b"
+  frame_color = "#79eaa2"
+

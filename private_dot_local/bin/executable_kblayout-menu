@@ -1,0 +1,10 @@
+#! /bin/env sh
+change_layout() {
+  setxkbmap "$1"
+  notify-send "Keyboard Layout changed" "set to ${1}"
+}
+
+case "$(echo -e "latam\nus" | dmenu -l 2 -W 250 -i -c -p "Keyboard")" in
+latam) change_layout latam ;;
+us) change_layout us ;;
+esac

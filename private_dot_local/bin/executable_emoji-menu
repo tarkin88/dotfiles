@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+selection=$(cat ~/.emojis | dmenu -b -W 1400 -c -l 15 -p "choose a emoji")
+echo "$selection" | awk '{print $1}' | tr -d '\n' | xclip -selection clipboard
+notify-send "$selection"
