@@ -3,10 +3,10 @@
 /* appearance */
 static const unsigned int borderpx       = 3;   /* border pixel of windows */
 static const unsigned int snap           = 32;  /* snap pixel */
-static const unsigned int gappih         = 5;   /* horiz inner gap between windows */
-static const unsigned int gappiv         = 5;   /* vert inner gap between windows */
-static const unsigned int gappoh         = 5;   /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov         = 5;   /* vert outer gap between windows and screen edge */
+static const unsigned int gappih         = 15;   /* horiz inner gap between windows */
+static const unsigned int gappiv         = 15;   /* vert inner gap between windows */
+static const unsigned int gappoh         = 15;   /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov         = 15;   /* vert outer gap between windows and screen edge */
 static const unsigned int gappfl         = 5;   /* gap between floating windows (when relevant) */
 static const unsigned int smartgaps_fact = 0;   /* smartgaps factor when there is only one client; 0 = no gaps, 3 = 3x outer gaps */
 
@@ -15,8 +15,8 @@ static unsigned int attachdefault        = AttachAside; // AttachMaster, AttachA
 static const int initshowbar             = 1;   /* 0 means no bar */
 
 static const int bar_height              = 0;   /* 0 means derive from font, >= 1 explicit height */
-static const int vertpad                 = borderpx;  /* vertical (outer) padding of bar */
-static const int sidepad                 = borderpx;  /* horizontal (outer) padding of bar */
+static const int vertpad                 = gappov;  /* vertical (outer) padding of bar */
+static const int sidepad                 = (gappoh + borderpx);  /* horizontal (outer) padding of bar */
 
 static const int iconsize                = 16;  /* icon size */
 static const int iconspacing             = 5;   /* space between icon and title */
@@ -79,7 +79,7 @@ static uint64_t functionality = 0
 //	|AutoReduceNmaster // automatically reduce the number of master clients if one is closed
 //	|BanishMouseCursor // like xbanish, hides mouse cursor when using the keyboard
 //	|BanishMouseCursorToCorner // makes BanishMouseCursor move the cursor to the top right corner of the screen
-//	|SmartGaps // enables no or increased gaps if there is only one visible window
+	|SmartGaps // enables no or increased gaps if there is only one visible window
 //	|SmartGapsMonocle // enforces no gaps in monocle layout
 	|Systray // enables a systray in the bar
 //	|SystrayNoAlpha // disables the use of transparency for the systray, enable if you do not use a compositor
@@ -93,7 +93,7 @@ static uint64_t functionality = 0
 	/*|ColorEmoji // enables color emoji support (removes Xft workaround)*/
 //	|Status2DNoAlpha // option to not use alpha when drawing status2d status
 	/*|BarBorder // draw a border around the bar*/
-	/*|BarPadding // add vertical and side padding as per vertpad and sidepad variables above*/
+//	|BarPadding // add vertical and side padding as per vertpad and sidepad variables above*/
 //	|NoBorders // as per the noborder patch, show no border when only one client in tiled mode
 //	|Warp // warp cursor to currently focused window
 //	|DecorationHints // omit drawing the window border if the applications asks not to
@@ -113,7 +113,7 @@ static uint64_t functionality = 0
 //	|Debug // enables additional debug output
 	/*|AltWindowTitles // show alternate window titles, if present*/
 //	|AltWorkspaceIcons // show the workspace name instead of the icons
-//	|GreedyMonitor // disables swap of workspaces between monitors
+	|GreedyMonitor // disables swap of workspaces between monitors
 	/*|SmartLayoutConversion // automatically adjust layout based on monitor orientation when moving a workspace from one monitor to another*/
 //	|AutoHideScratchpads // automatically hide open scratchpads when moving to another workspace
 //	|RioDrawIncludeBorders // indicates whether the area drawn using slop includes the window borders
@@ -208,7 +208,7 @@ static const Rule clientrules[] = {
 	 *	WM_WINDOW_ROLE(STRING) = role
 	 *	_NET_WM_WINDOW_TYPE(ATOM) = wintype
 	 */
-	{ .wintype = "_KDE_NET_WM_WINDOW_TYPE_OVERRIDE", .flags = Unmanaged },
+	/*{ .wintype = "_KDE_NET_WM_WINDOW_TYPE_OVERRIDE", .flags = Unmanaged },*/
 	{ .wintype = WTYPE "DESKTOP", .flags = Unmanaged|Lower },
 	{ .wintype = WTYPE "DOCK", .flags = Unmanaged|Raise },
 	{ .wintype = WTYPE "DIALOG", .flags = AlwaysOnTop|Centered|Floating },
@@ -218,11 +218,12 @@ static const Rule clientrules[] = {
 	{ .instance = "spterm (w)", .scratchkey = 'w', .flags = Floating, .floatpos = "50% 0% 90% 50%" },
 	{ .instance = "spterm (e)", .scratchkey = 'e', .flags = Floating , .floatpos = "50% 100% 90% 50%"},
 	{ .instance = "spvol (v)", .scratchkey = 'v', .flags = Floating , .floatpos = "50% 100% 60% 30%"},
-	{ .instance = "spfm (r)", .scratchkey = 'r', .flags = Floating , .floatpos = "50% 50% 60% 40%"},
+	{ .instance = "spfm (y)", .scratchkey = 'y', .flags = Floating , .floatpos = "50% 50% 60% 40%"},
 	{ .class = "Google-chrome", .workspace = "1", .flags = AttachMaster|SwitchWorkspace },
 	{ .class = "Google-chrome", .role = "GtkFileChooserDialog", .floatpos = "50% 50%", .flags = AlwaysOnTop|Floating },
+	{ .class = "kitty", .flags = Terminal|AttachBottom },
 	{ .role = "pop-up", .flags = AlwaysOnTop|Floating|Centered },
-	{ .class = "st-256color", .flags = Terminal|AttachBottom },
+	{ .class = "zoom", .flags = Floating },
 };
 
 /* Bar settings, this defines what bars exists, their position, and what attributes they have.
@@ -416,7 +417,7 @@ static const StackerIcon stackericons[] = {
 #define CMD(...)   { .v = (const char*[]){ NULL, __VA_ARGS__, NULL } }
 
 /* Scratch/Spawn commands:        NULL (scratchkey), command, argument, argument, ..., NULL */
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "kitty", NULL };
 static const char *dmenucmd[] = {
 	"dmenu_run",
 	"-p", " Search",
@@ -424,10 +425,10 @@ static const char *dmenucmd[] = {
 	"-c",
 	NULL
 };
-static const char *spcmd_w[]            = {"w", "st", "-n", "spterm (w)", NULL };
-static const char *spcmd_e[]            = {"e", "st", "-n", "spterm (e)",  NULL };
-static const char *spcmd_r[]            = {"r", "st", "-n", "spfm (r)", "-e", "yazi", NULL };
-static const char *spcmd_v[]            = {"v", "st", "-n", "spvol (v)", "-e", "pulsemixer", NULL };
+static const char *spcmd_w[]            = {"w", "kitty", "--name", "spterm (w)", NULL };
+static const char *spcmd_e[]            = {"e", "kitty", "--name", "spterm (e)",  NULL };
+static const char *spcmd_y[]            = {"r", "kitty", "--name", "spfm (y)", "-e", "yazi", NULL };
+static const char *spcmd_v[]            = {"v", "kitty", "--name", "spvol (v)", "-e", "pulsemixer", NULL };
 
 /* status click */
 static const char *statusclickcmd[]     = { "~/.local/bin/statusbar/statusclick.sh", NULL };
@@ -562,7 +563,7 @@ static Key keys[] = {
 
 	SCRATCHKEYS(MODKEY,                         XK_w,            spcmd_w)
 	SCRATCHKEYS(MODKEY,                         XK_e,            spcmd_e)
-	SCRATCHKEYS(MODKEY,                         XK_r,            spcmd_r)
+	SCRATCHKEYS(MODKEY,                         XK_y,            spcmd_y)
 	SCRATCHKEYS(MODKEY,                         XK_v,            spcmd_v)
 
 	WSKEYS(MODKEY,                              XK_1,            "1")
