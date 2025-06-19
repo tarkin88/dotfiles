@@ -1,0 +1,10 @@
+Xft.dpi:       115
+Xft.rgba:      rgba
+Xft.antialias: 1
+Xft.hinting:   1
+Xft.autohint:  0
+*.font: Iosevka Nerd Font:pixelsize=20:antialias=true:autohint=true:hintstyle=hintmedium
+
+#include "/home/frank/.Xresources.d/themes/rose-pine-dawn.res"
+#include "/home/frank/.Xresources.d/themes/template.txt"
+
