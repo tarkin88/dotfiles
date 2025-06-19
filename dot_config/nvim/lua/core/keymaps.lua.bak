@@ -1,0 +1,63 @@
+--
+--   KEYBINDINGS REFERENCE
+--   -------------------------------------------------------------------
+--   |        Mode  | Norm | Ins | Cmd | Vis | Sel | Opr | Term | Lang |
+--   Command        +------+-----+-----+-----+-----+-----+------+------+
+--   [nore]map      | yes  |  -  |  -  | yes | yes | yes |  -   |  -   |
+--   n[nore]map     | yes  |  -  |  -  |  -  |  -  |  -  |  -   |  -   |
+--   [nore]map!     |  -   | yes | yes |  -  |  -  |  -  |  -   |  -   |
+--   i[nore]map     |  -   | yes |  -  |  -  |  -  |  -  |  -   |  -   |
+--   c[nore]map     |  -   |  -  | yes |  -  |  -  |  -  |  -   |  -   |
+--   v[nore]map     |  -   |  -  |  -  | yes | yes |  -  |  -   |  -   |
+--   x[nore]map     |  -   |  -  |  -  | yes |  -  |  -  |  -   |  -   |
+--   s[nore]map     |  -   |  -  |  -  |  -  | yes |  -  |  -   |  -   |
+--   o[nore]map     |  -   |  -  |  -  |  -  |  -  | yes |  -   |  -   |
+--   t[nore]map     |  -   |  -  |  -  |  -  |  -  |  -  | yes  |  -   |
+--   l[nore]map     |  -   | yes | yes |  -  |  -  |  -  |  -   | yes  |
+--   -------------------------------------------------------------------
+
+local M = {}
+local utils = require("core.utils")
+local maps = require("core.utils").get_mappings_template()
+
+-- standard Operations -----------------------------------------------------
+maps.n["<C-q>"] = { "<cmd>confirm q<cr>", desc = "Quit" }
+maps.n["<C-s>"] = { "<cmd>w<cr>", desc = "Save" }
+maps.n["<Esc>"] = { "<cmd>nohlsearch<cr>", desc = "Remove highlight from search results" }
+maps.n["q"] = { "<nop>", desc = "do not record macro, ever" }
+maps.n["x"] = { '"_x', desc = "Remove highlight from search results" }
+maps.v["<C-c>"] = { '"+y', desc = "Copy yank to clipboard" }
+maps.x["p"] = { '"_dP', desc = "better paste" }
+maps.n["<Tab>"] = {
+	"<Tab>",
+	noremap = true,
+	silent = true,
+	expr = false,
+	desc = "FIX: Prevent TAB from behaving like <C-i>, as they share the same internal code",
+}
+-- cursors
+maps.n["j"] = { "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Move cursor down" }
+maps.n["k"] = { "v:count == 0 ? 'gk' : 'k'", expr = true, desc = "Move cursor up" }
+-- splits
+maps.n["|"] = { "<cmd>vsplit<cr>", desc = "Vertical Split" }
+maps.n["\\"] = { "<cmd>split<cr>", desc = "Horizontal Split" }
+-- resize splits
+maps.n["<C-Up>"] = { "<cmd>resize +2<cr>", desc = "Increase Window Height" }
+maps.n["<C-Down>"] = { "<cmd>resize -2<cr>", desc = "Decrease Window Height" }
+maps.n["<C-Right>"] = { "<cmd>vertical resize +2<cr>", desc = "Increase Window width" }
+maps.n["<C-Left>"] = { "<cmd>vertical resize -2<cr>", desc = "decrease Window width" }
+-- buffers
+maps.n["<A-Left>"] = { "<cmd>bnext<cr>", desc = "switch to the next buffer" }
+maps.n["<A-Right>"] = { "<cmd>bprevious<cr>", desc = "switch to the previous buffer" }
+-- move lines
+maps.v["K"] = { "<cmd>move '<-1<return>gv", desc = "move highlighted text up" }
+maps.v["J"] = { "<cmd>move '>+1<return>gv", desc = "move highlighted text down" }
+maps.t["qq"] = { "<C-\\><C-n>", desc = "exit terminal mode without closing the terminal" }
+--terminal
+maps.n["<leader>t"] = { "", desc = "+terminal" }
+maps.n["<leader>tt"] = { "<cmd>vs | vertical resize 80 |  terminal<cr>", desc = "open terminal" }
+maps.n["<leader>tv"] = { "<cmd>botright new | resize 14 | terminal<cr>", desc = "open vs code style terminal" }
+
+utils.set_mappings(maps)
+
+return M
