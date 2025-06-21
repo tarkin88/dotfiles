@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+#
+function get_volume {
+  pactl get-sink-volume '@DEFAULT_SINK@' | awk '{print $5}' | tr -d '%'
+}
+
+function send_notification {
+  volume=$(get_volume)
+  bar=$(seq -s "─" $(($volume / 3)) | sed 's/[0-9]//g')
+  echo $volume
+  # Send the notification
+  dunstify -a "VolumeManager" -t 2000 -r 2593 -u normal "volume: ${volume}%" "$bar"
+}
+
+case $1 in
+get)
+  get_volume
+  ;;
+notify)
+  send_notification
+  ;;
+up)
+  if [ "$(get_volume)" -lt 100 ]; then
+    pactl set-sink-volume '@DEFAULT_SINK@' +5%
+  fi
+  send_notification
+  ;;
+down)
+  pactl set-sink-volume '@DEFAULT_SINK@' -5%
+  send_notification
+  ;;
+mute)
+  # Toggle mute
+  pactl set-sink-mute '@DEFAULT_SINK@' toggle
+  if [ $(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}') == 'yes' ]; then
+    dunstify -a "VolumeManager" -t 4000 -r 2593 -u normal "Mute"
+  else
+    send_notification
+  fi
+  ;;
+esac

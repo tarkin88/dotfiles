@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+warning_time=8 # 14m
+lock_time=9    # 15m
+
+xset s "$warning_time" "$lock_time"
+
+xss-lock -n "notify-send --urgency=critical 'Warning' 'Computer will be locked'" -- betterlockscreen -l dimblur
+echo $lock_time
+sleep 1s
+systemctl sleep
+
+xautolock -time 15 -locker 'systemctl suspend' -notify 600 -notifier 'betterlockscreen -l dimblur | xset dpms force off' &

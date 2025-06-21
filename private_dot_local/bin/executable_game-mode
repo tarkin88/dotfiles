@@ -1,0 +1,29 @@
+#!/usr/bin/env sh
+DEVICE="wlp10s0"
+
+function set_game_mode(){
+  local mode=$1
+  if [[ $mode -eq 1 ]]; then
+    pkexec iw dev "${DEVICE}" set power_save off
+    xset s 3000 2 &
+    notify-send "Game Mode ON"
+    steam &
+    pkill picom &
+    pkill redshift &
+    systemctl --user stop redshift
+  else
+    pkexec iw dev "${DEVICE}" set power_save on
+    xset s 898 2 &
+    notify-send "Game Mode OFF"
+    pkill steam &
+    picom &
+    redshift &
+    systemctl  --user start redshift
+  fi
+}
+
+
+case "$(echo -e "ON\nOFF" | dmenu -l 2 -W 250 -i -c -p "GameMode")" in
+  ON) set_game_mode 1 ;;
+  OFF) set_game_mode 0 ;;
+esac

@@ -1,0 +1,42 @@
+#!/bin/bash
+
+SCRATCH_DIR="$HOME/Documents/scratchpads"
+TODAY_SCRIPT="$HOME/.local/bin/scratchpad"
+
+shopt -s nullglob
+files=("$SCRATCH_DIR"/scratchpad-*.md)
+shopt -u nullglob
+
+[[ ${#files[@]} -eq 0 ]] && exec "$TODAY_SCRIPT"
+
+months=$(basename -a "${files[@]}" |
+  grep -Eo '[0-9]{2}-[0-9]{2}-[0-9]{4}' |
+  awk -F- '{print $2 "-" $3}' |
+  sort -r | uniq)
+
+while true; do
+  menu1=$(printf "Today\n%s" "$months" | dmenu -i -p "Scratchpads:" -c -l 10 -W 460)
+  [[ -z "$menu1" ]] && exit 1
+
+  if [[ "$menu1" == "Today" ]]; then
+    exec "$TODAY_SCRIPT"
+  fi
+
+  month="${menu1%%-*}"
+  year="${menu1##*-}"
+
+  filtered=$(basename -a "${files[@]}" |
+    grep -E "scratchpad-[0-9]{2}-$month-$year\.md" |
+    sort -r)
+
+  chosen_file=$(printf "[Back]\n%s\n" "$filtered" | dmenu -i -p "files: $menu1:" -c -l 10 -W 460)
+
+  if [[ -z "$chosen_file" ]]; then
+    exit 1
+  elif [[ "$chosen_file" == "[Back]" ]]; then
+    continue
+  else
+    st -e nvim "$SCRATCH_DIR/$chosen_file"
+    exit 0
+  fi
+done

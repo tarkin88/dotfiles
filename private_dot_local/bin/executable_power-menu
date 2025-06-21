@@ -1,0 +1,18 @@
+#!/bin/bash
+
+case "$(echo -e "Poweroff\nReboot\nLogout\nSuspend\nLock" | dmenu -l 5 -i -c  -W 400 -p "Choose")" in
+Poweroff) exec poweroff ;;
+Reboot) exec reboot ;;
+Logout) exec duskc run_command quit ;;
+Suspend)
+  playerctl pause
+  # xset s activate
+  exec betterlockscreen -l dimblur &
+  sleep 0.5s
+  systemctl suspend
+  ;;
+Lock)
+  playerctl pause
+  exec betterlockscreen -l dimblur
+  ;;
+esac

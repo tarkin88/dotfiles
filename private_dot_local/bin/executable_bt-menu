@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+bzmenu -l custom --launcher-command "dmenu -l 7 -c"

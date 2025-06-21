@@ -1,0 +1,12 @@
+#!/bin/bash
+profiles=$(autorandr --list)
+
+chosen=$(echo "$profiles" | dmenu -i -p "Profiles" -l 10 -c -W 200)
+
+if [ -n "$chosen" ]; then
+  autorandr --load "$chosen" &
+  sleep 1s
+  duskc run_command restart &
+  ~/.fehbg &
+  notify-send "Display Profile Changed" "Switched to '$chosen'"
+fi

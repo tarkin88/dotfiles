@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+case "$(echo -e "Firefox\nVSCode\n1Password\nPostman\nSpotify" | dmenu -l 7 -W 350 -i -c -p "favorites")" in
+  Firefox) exec firefox ;;
+  VSCode) exec code ;;
+  1Password) exec 1password ;;
+  Spotify) exec spotify ;;
+  Postman) exec postman ;;
+esac
+

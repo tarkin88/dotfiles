@@ -1,0 +1,15 @@
+#!/bin/bash
+
+day=$(date +%d)
+month=$(date +%m)
+year=$(date +%Y)
+
+filepath="$HOME/Documents/scratchpads"
+filename="scratchpad-${day}-${month}-${year}.md"
+file="${filepath}/${filename}"
+
+mkdir -p "$filepath"
+
+[[ -f "$file" ]] || touch "$file"
+
+st -e nvim "$file"

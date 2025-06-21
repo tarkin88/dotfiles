@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+MAX_VALUE=19200
+UNIT_VALUE=192
+
+function get_value {
+  local current=$(brightnessctl get)
+  echo "scale=0 ; $current / $UNIT_VALUE" | bc
+
+}
+
+function send_notification {
+  current=$(get_value)
+  bar=$(seq -s "─" $(($current / 3)) | sed 's/[0-9]//g')
+  echo $bar
+  # Send the notification
+  dunstify -a "BrightnessManager" -t 2000 -r 2593 -u normal "brightness: ${current}%" "$bar"
+}
+
+case $1 in
+get)
+  get_value
+  ;;
+notify)
+  send_notification
+  ;;
+up)
+  if [ "$(get_value)" -lt 100 ]; then
+    brightnessctl set +5%
+  fi
+  send_notification
+  ;;
+down)
+  brightnessctl set 5%-
+  send_notification
+  ;;
+esac
