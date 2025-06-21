@@ -83,19 +83,12 @@ return {
 			desc = "Blame [L]ine",
 		},
 		{
-			"<F11>",
+			"<leader>fz",
 			function()
 				Snacks.zen.zen()
 			end,
 			desc = "Toggle [Z]en mode",
 		},
-		-- {
-		-- 	"<leader>e",
-		-- 	function()
-		-- 		Snacks.explorer.open()
-		-- 	end,
-		-- 	desc = "Open file explorer",
-		-- },
 
 		-- files
 		{
@@ -112,16 +105,9 @@ return {
 			end,
 			desc = "[F]iles",
 		},
-		{
-			"<F2>",
-			function()
-				Snacks.picker()
-			end,
-			desc = "",
-		},
 		-- LSP
 		{
-			"<F5>",
+			"<F2>",
 			function()
 				Snacks.picker("diagnostics_buffer")
 			end,
@@ -279,14 +265,6 @@ return {
 				Snacks.picker.lsp_workspace_symbols()
 			end,
 			desc = "LSP Workspace Symbols",
-		},
-		-- terminal
-		{
-			"<leader>tt",
-			function()
-				Snacks.terminal.toggle()
-			end,
-			desc = "[T]oogle",
 		},
 		-- buffer delete
 		{
