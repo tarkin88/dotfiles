@@ -93,7 +93,11 @@ return {
 			virt_lines = false,
 			virt_text_win_col = nil,
 		})
-
+		vim.api.nvim_set_hl(0, "DapBreakpointColor", { fg = "#d7827e" })
+		vim.fn.sign_define(
+			"DapBreakpoint",
+			{ text = " ", texthl = "DapBreakpointColor", linehl = "", numhl = "DapBreakpointColor" }
+		)
 		-- Configuración de DAP UI
 		dapui.setup({
 			layouts = {
@@ -138,85 +142,85 @@ return {
 			dap_python.setup()
 			vim.notify("⚠️ Using python from the system", vim.log.levels.WARN)
 		end
-
-		-- Configuraciones de adaptadores adicionales para diferentes casos
-		dap.configurations.python = {
-			-- Configuración para Django (automática)
-			{
-				type = "python",
-				request = "launch",
-				name = "🌐 Django Auto-Debug",
-				program = "${workspaceFolder}/manage.py",
-				args = { "runserver", "0.0.0.0:8000", "--nothreading" },
-				django = true,
-				justMyCode = false,
-				console = "integratedTerminal",
-				autoReload = {
-					enable = true,
-				},
-			},
-			-- Configuración para Django con debugpy remoto
-			{
-				type = "python",
-				request = "attach",
-				name = "🔌 Django Remote Attach",
-				connect = {
-					host = "127.0.0.1",
-					port = 5678,
-				},
-				mode = "remote",
-				justMyCode = false,
-				django = true,
-			},
-			-- Configuración para script Python actual
-			{
-				type = "python",
-				request = "launch",
-				name = "📄 Current File",
-				program = "${file}",
-				console = "integratedTerminal",
-				justMyCode = false,
-			},
-			-- Configuración para detectar archivo principal automáticamente
-			{
-				type = "python",
-				request = "launch",
-				name = "🎯 Auto Main File",
-				program = function()
-					return find_main_python_file()
-				end,
-				console = "integratedTerminal",
-				justMyCode = false,
-			},
-			-- Configuración para tests de Django
-			{
-				type = "python",
-				request = "launch",
-				name = "🧪 Django Tests",
-				program = "${workspaceFolder}/manage.py",
-				args = function()
-					local test_path = vim.fn.input("Test path (opcional): ")
-					if test_path and test_path ~= "" then
-						return { "test", test_path }
-					else
-						return { "test" }
-					end
-				end,
-				django = true,
-				justMyCode = true,
-				console = "integratedTerminal",
-			},
-			-- Configuración para pytest
-			{
-				type = "python",
-				request = "launch",
-				name = "🔬 Pytest Current",
-				module = "pytest",
-				args = { "${file}", "-v" },
-				console = "integratedTerminal",
-				justMyCode = true,
-			},
-		}
+		--
+		-- -- Configuraciones de adaptadores adicionales para diferentes casos
+		-- dap.configurations.python = {
+		-- 	-- Configuración para Django (automática)
+		-- 	{
+		-- 		type = "python",
+		-- 		request = "launch",
+		-- 		name = "🌐 Django Auto-Debug",
+		-- 		program = "${workspaceFolder}/manage.py",
+		-- 		args = { "runserver", "0.0.0.0:8000", "--nothreading" },
+		-- 		django = true,
+		-- 		justMyCode = false,
+		-- 		console = "integratedTerminal",
+		-- 		autoReload = {
+		-- 			enable = true,
+		-- 		},
+		-- 	},
+		-- 	-- Configuración para Django con debugpy remoto
+		-- 	{
+		-- 		type = "python",
+		-- 		request = "attach",
+		-- 		name = "🔌 Django Remote Attach",
+		-- 		connect = {
+		-- 			host = "127.0.0.1",
+		-- 			port = 5678,
+		-- 		},
+		-- 		mode = "remote",
+		-- 		justMyCode = false,
+		-- 		django = true,
+		-- 	},
+		-- 	-- Configuración para script Python actual
+		-- 	{
+		-- 		type = "python",
+		-- 		request = "launch",
+		-- 		name = "📄 Current File",
+		-- 		program = "${file}",
+		-- 		console = "integratedTerminal",
+		-- 		justMyCode = false,
+		-- 	},
+		-- 	-- Configuración para detectar archivo principal automáticamente
+		-- 	{
+		-- 		type = "python",
+		-- 		request = "launch",
+		-- 		name = "🎯 Auto Main File",
+		-- 		program = function()
+		-- 			return find_main_python_file()
+		-- 		end,
+		-- 		console = "integratedTerminal",
+		-- 		justMyCode = false,
+		-- 	},
+		-- 	-- Configuración para tests de Django
+		-- 	{
+		-- 		type = "python",
+		-- 		request = "launch",
+		-- 		name = "🧪 Django Tests",
+		-- 		program = "${workspaceFolder}/manage.py",
+		-- 		args = function()
+		-- 			local test_path = vim.fn.input("Test path (opcional): ")
+		-- 			if test_path and test_path ~= "" then
+		-- 				return { "test", test_path }
+		-- 			else
+		-- 				return { "test" }
+		-- 			end
+		-- 		end,
+		-- 		django = true,
+		-- 		justMyCode = true,
+		-- 		console = "integratedTerminal",
+		-- 	},
+		-- 	-- Configuración para pytest
+		-- 	{
+		-- 		type = "python",
+		-- 		request = "launch",
+		-- 		name = "🔬 Pytest Current",
+		-- 		module = "pytest",
+		-- 		args = { "${file}", "-v" },
+		-- 		console = "integratedTerminal",
+		-- 		justMyCode = true,
+		-- 	},
+		-- }
 
 		-- Keymaps mejorados
 		vim.keymap.set("n", "<F9>", dap.continue, { desc = "Start/Continue Debug" })
