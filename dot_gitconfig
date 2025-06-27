@@ -1,0 +1,14 @@
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[diff]
+	colorMoved = zebra
+[user]
+	email = franksg88@gmail.com
+	name = Francisco Suarez
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
