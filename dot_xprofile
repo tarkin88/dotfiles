@@ -1,0 +1,19 @@
+ #!/bin/env sh
+
+if [ -d "$HOME/.local/bin" ]; then
+  PATH="$HOME/.local/bin:$PATH"
+fi
+
+if [ -d "$HOME/.yarn/bin" ]; then
+  PATH="$HOME/.yarn/bin/:$PATH"
+fi
+
+# Environments
+export EDITOR="nvim"
+export VISUAL=$EDITOR
+export BROWSER="firefox"
+export TERM="st"
+export QT_QPA_PLATFORMTHEME=qt5ct
+# export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+export wname='LG3D'
+export _JAVA_AWT_WM_NONREPARENTING=1
