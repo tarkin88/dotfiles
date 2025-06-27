@@ -35,7 +35,7 @@ COLOR_SCOPE.color15: COLOR15
 ! === dusk foreground colors ===
 dusk.norm.fg.color:                   NORM_FG_COLOR
 dusk.titlenorm.fg.color:              TITLE_NORM_FG_COLOR
-dusk.titlesel.fg.color:               TERMINAL_FOREGROUND
+dusk.titlesel.fg.color:               TITLE_SEL_FG_COLOR
 dusk.scratchnorm.fg.color:            SCRATCH_NORM_FG_COLOR
 dusk.scratchsel.fg.color:             SCRATCH_SEL_FG_COLOR
 dusk.hidnorm.fg.color:                HID_NORM_FG_COLOR
