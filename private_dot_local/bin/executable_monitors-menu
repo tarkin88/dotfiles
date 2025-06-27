@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+change_monitor_layout() {
+  local layout=$1
+  autorandr --load "${layout}" 
+  sleep 1s &
+  notify-send "Changed" "set to ${1} layout" &
+  ~/.fehbg &
+  duskc run_command restart
+}
+
+case "$(echo -e "full\none" | dmenu -l 2 -W 450 -i -c -p "Monitor layout")" in
+full) change_monitor_layout full ;;
+one) change_monitor_layout one ;;
+esac
