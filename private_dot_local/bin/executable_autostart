@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-autorandr --load full &
+autorandr --load external &
 sleep 0.5s
 xset r rate 260 30 &
 xset s 898 2 &
