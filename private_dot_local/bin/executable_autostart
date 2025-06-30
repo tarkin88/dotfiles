@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
-autorandr --load external &
+# autorandr --load full &
+xrandr --output HDMI-0 --mode 1920x1080 --pos 6400x1082 --rotate left --output DP-0 --primary --mode 3840x2560 --pos 2560x0 --rotate normal --scale 0.8x0.8 --output DP-1 --off --output DP-2 --mode 2560x1440 --pos 0x1215 --rotate normal --output DP-3 --off --output DP-4 --off --output DP-5 --off
+
 sleep 0.5s
 xset r rate 260 30 &
 xset s 898 2 &
