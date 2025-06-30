@@ -81,10 +81,9 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function            format                 argument      status_no     update_interval */
-  { temp,                "   %s°",              "/sys/class/thermal/thermal_zone0/temp",          "6",        10  },
-  { run_command,         "   %s",              "/home/frank/.local/bin/volume-manager get",      "5",        2  },
-	{ wifi_perc,           "   %s%%",            "wlan0",                                          "4",        60 },
-	{ battery_perc,        " 󰁹 %s%%",             "BAT0",                                           "3",        60 },
-	{ battery_remaining,   "%s",                  "BAT0",                                           "2",        60 },
-	{ datetime,            "   %s",              "%H:%M",                                          "1",        1  },
+  { temp,                " %s°",             "/sys/class/hwmon/hwmon1/temp1_input",         "6",        10  },
+  { run_command,         " %s",              "/home/frank/.local/bin/volume-manager get",      "5",        2  },
+	{ wifi_essid,          "%s",                 "wlan0",                                          "2",        60 },
+	{ wifi_perc,           " %s%%",            "wlan0",                                          "3",        60 },
+	{ datetime,            " %s",              "%H:%M",                                          "1",        1  },
 };

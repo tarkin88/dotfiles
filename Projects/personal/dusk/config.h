@@ -15,7 +15,7 @@ static unsigned int attachdefault        = AttachAside; // AttachMaster, AttachA
 static const int initshowbar             = 1;   /* 0 means no bar */
 
 static const int bar_height              = 0;   /* 0 means derive from font, >= 1 explicit height */
-static const int vertpad                 = (borderpx + 8);  /* vertical (outer) padding of bar */
+static const int vertpad                 = (borderpx );  /* vertical (outer) padding of bar */
 static const int sidepad                 = borderpx;  /* horizontal (outer) padding of bar */
 
 static const int iconsize                = 16;  /* icon size */
@@ -93,7 +93,7 @@ static uint64_t functionality = 0
 	// |ColorEmoji // enables color emoji support (removes Xft workaround)
 //	|Status2DNoAlpha // option to not use alpha when drawing status2d status
 	// |BarBorder // draw a border around the bar
-		|BarBorderColBg // optionally use the bar background colour for the bar border (rather than border colour)
+		// |BarBorderColBg // optionally use the bar background colour for the bar border (rather than border colour)
 	|BarPadding // add vertical and side padding as per vertpad and sidepad variables above
 	|NoBorders // as per the noborder patch, show no border when only one client in tiled mode
 //	|Warp // warp cursor to currently focused window
@@ -132,7 +132,7 @@ static int flexwintitle_hiddenweight     = 0;  // hidden window title weight
 static int flexwintitle_floatweight      = 0;  // floating window title weight, set to 0 to not show floating windows
 static int flexwintitle_separator        = 0;  // width of client separator
 
-static const char *fonts[]               = { "JetBrains Nerd Font:size=12" };
+static const char *fonts[]               = { "JetBrains Nerd Font:size=16" };
 static       char dmenufont[60]          = "monospace:size=10";
 
 static char dmenunormfgcolor[] = "#D9CFC5";
@@ -281,8 +281,8 @@ static const Rule clientrules[] = {
  */
 static const BarDef bars[] = {
 	/* monitor idx  vert   x     y      w     h     name            ext class  ext inst  ext name */
-	{  0,      0,   0,    "50%  0%     70% -1h ", "Primary top" },
-	{  1,      0,   0,    "0%    0%     100% -1h ", "Secondary top" },
+	{  0,      0,   0,    "50%  0%     80% -1h ", "Primary top" },
+	// {  0,      0,   0,    "0%    0%     100% -1h ", "Secondary top" },
 	// {  1,      1,   0,    "0%    100%   100% -1h ", "Secondary bottom" },
 	// {  2,      0,   0,    "0%    0%     100% -1h ", "Tertiary top" },
 	// {  2,      1,   0,    "0%    100%   100% -1h ", "Tertiary bottom" },
@@ -366,7 +366,7 @@ static const WorkspaceRule wsrules[] = {
 	{  "2",   0,       1,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "",   "2",   "2", },
 	{  "3",   0,       1,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "",   "3",   "3", },
 	{  "4",   0,       1,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "",   "4",   "4", },
-	{  "5",   1,       1,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "",   "5",   "5", },
+	{  "5",   0,       1,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "",   "5",   "5", },
 	{  "6",   1,       1,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "",   "6",   "6", },
 	{  "7",   1,       1,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "",   "7",   "7", },
 	{  "8",   1,       1,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "",   "8",   "8", },
@@ -453,8 +453,7 @@ static const char *termcmd[]  = { "st", NULL };
 static const char *dmenucmd[] = {
 	"dmenu_run",
     "-p", " Search",
-	"-l", "6",
-	"-W", "400",
+	"-l", "7",
 	"-c",
 	NULL
 };
